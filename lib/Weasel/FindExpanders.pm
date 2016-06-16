@@ -30,6 +30,7 @@ use strict;
 use warnings;
 
 use base 'Exporter';
+use Carp;
 
 our @EXPORT_OK = qw| register_find_expander expand_finder_pattern |;
 
@@ -57,7 +58,7 @@ sub register_find_expander {
     push @{$find_expanders{$group}{$pattern_name}}, $expander_function;
 }
 
-=item expand_finder_pattern($pattern, $groups)
+=item expand_finder_pattern($pattern, $args, $groups)
 
 Returns a string of concatenated (using xpath '|' operator) expansions.
 
@@ -69,14 +70,17 @@ is returned as the only list/arrayref element.
 =cut
 
 sub expand_finder_pattern {
-    my ($pattern, $groups) = @_;
+    my ($pattern, $args, $groups) = @_;
 
-    $groups //= keys %find_expanders;   # undef --> unrestricted
-    return (wantarray ? ($pattern) : [ $pattern ])
-        if ! ($pattern =~ m/\*([^\|]+)\|({.*})/);
+    return $pattern
+        if ! ($pattern =~ m/\*([^\|]+)/);
     my $name = $1;
+
+    croak "No expansions registered (while expanding '$pattern')"
+        if scalar(keys %find_expanders) == 0;
+
+    $groups //= [ keys %find_expanders ];   # undef --> unrestricted
     # Using eval below to transform a hash-in-string to a hash efficiently
-    my $args = eval "$2"; ## no critic (ProhibitStringyEval)
 
     my @matches;
 
@@ -86,6 +90,9 @@ sub expand_finder_pattern {
         push @matches,
           reverse map { $_->(%$args) } @{$find_expanders{$group}{$name}};
     }
+
+    croak "No expansions matching '$pattern'"
+        if ! @matches;
 
     return join "\n|", @matches;
 }

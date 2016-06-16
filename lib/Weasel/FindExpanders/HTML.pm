@@ -103,7 +103,7 @@ sub labelled_expander {
 
     my $tag = $args{tag_name} // '*';
     my $text = $args{text};
-    return ".//${tag}[id=//label[text()='$text']/\@for]";
+    return ".//${tag}[\@id=//label[text()='$text']/\@for]";
 }
 
 =item link_expander
