@@ -28,6 +28,7 @@ use warnings;
 use Weasel::Widgets::HTML::Button; # button, reset, image, submit, BUTTON
 use Weasel::Widgets::HTML::Selectable; # checkbox, radio, OPTION
 use Weasel::Widgets::HTML::Input; # text, password, <default>
+use Weasel::Widgets::HTML::Select;
 
 # No widgets for file inputs and
 #  more importantly TEXTAREA, FORM and SELECT
