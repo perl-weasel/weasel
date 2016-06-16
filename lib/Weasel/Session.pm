@@ -37,10 +37,11 @@ use strict;
 use warnings;
 
 use Moose;
+
+use Try::Tiny;
 use Weasel::Element::Document;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
-
 
 =head1 ATTRIBUTES
 
@@ -111,7 +112,17 @@ sub find {
     my ($self, @args) = @_;
     my $rv;
 
-    $self->wait_for( sub { return $rv = shift @{$self->find_all(@args)}; });
+    $self->wait_for( sub {
+        my @rv;
+        try {
+            @rv =  @{$self->find_all(@args)};
+        }
+        catch {
+            ###TODO add logger statement warning of consumed error
+        };
+        return $rv = shift @rv;
+
+                     });
 
     return $rv;
 }
@@ -121,13 +132,14 @@ sub find {
 =cut
 
 sub find_all {
-    my ($self, $element, $pattern, $args) = @_;
+    my ($self, $element, $pattern, %args) = @_;
 
+    my $expanded_pattern = expand_finder_pattern($pattern, \%args);
     my @rv =
         map { $self->_wrap_widget($_) }
         $self->driver->find_all($element->_id,
-                                expand_finder_pattern($pattern),
-                                $args->{scheme});
+                                $expanded_pattern,
+                                $args{scheme});
     return wantarray ? @rv : \@rv;
 }
 
@@ -143,9 +155,20 @@ sub get {
     my ($self, $url) = @_;
 
     $url = $self->base_url . $url;
+    ###TODO add logging warning of urls without protocol part
+    # which might indicate empty 'base_url' where one is assumed to be set
     $self->driver->get($url);
 }
 
+=item screenshot($fh)
+
+=cut
+
+sub screenshot {
+    my ($self, $fh) = @_;
+
+    $self->driver->screenshot($fh);
+}
 
 =item wait_for($callback)
 
@@ -173,8 +196,7 @@ sub _wrap_widget {
     my ($self, $_id) = @_;
     my $best_class = best_match_handler_class(
         $self->driver, $_id, $self->widget_groups) // 'Weasel::Element';
-
-    return $best_class->new(_id => $_id, session => $self->session);
+    return $best_class->new(_id => $_id, session => $self);
 }
 
 =back

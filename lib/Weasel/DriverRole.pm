@@ -158,6 +158,21 @@ sub set_selected {
     croak "Abstract interface method 'set_selected' called";
 }
 
+=item screenshot($fh)
+
+=cut
+
+sub screenshot {
+    croak "Abstract interface method 'screenshot' called";
+}
+
+=item tag_name($element_id)
+
+=cut
+
+sub tag_name {
+    croak "Abstract interface method 'tag_name' called";
+}
 
 =back
 
