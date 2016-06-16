@@ -32,7 +32,7 @@ extends 'Weasel::Element';
 =cut
 
 has '+_id' => (required => 0,
-               default => '//html');
+               default => '/html');
 
 =back
 

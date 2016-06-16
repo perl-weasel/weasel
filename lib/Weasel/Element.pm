@@ -10,7 +10,7 @@ Weasel::Element - The base HTML/Widget element class
 =head1 SYNOPSIS
 
    my $element = $session->page->find("./input[\@name='phone']");
-   my $value = $element->send_keys('555-885-321'
+   my $value = $element->send_keys('555-885-321');
 
 =head1 DESCRIPTION
 
@@ -54,10 +54,9 @@ has _id => (is => 'ro',
 =cut
 
 sub find {
-    my $self = shift @_;
-    my @rv = $self->find_all(@_);
+    my ($self, @args) = @_;
 
-    return shift @rv;
+    return $self->session->find($self, @args);
 }
 
 =item find_all($locator [, $scheme])
@@ -65,10 +64,10 @@ sub find {
 =cut
 
 sub find_all {
-    my ($self, $locator, $scheme) = @_;
+    my ($self, @args) = @_;
 
     # expand $locator based on framework plugins (e.g. Dojo)
-    return $self->session->find_all($self, $locator, $scheme);
+    return $self->session->find_all($self, @args);
 }
 
 =item click()
