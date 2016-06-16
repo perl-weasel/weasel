@@ -96,7 +96,7 @@ sub _cached_elem_att {
 sub best_match_handler_class {
     my ($driver, $_id, $groups) = @_;
 
-    $groups //= keys %widget_handlers;   # undef --> unrestricted
+    $groups //= [ keys %widget_handlers ];   # undef --> unrestricted
 
     my @matches;
     my $elem_att_cache = {};
