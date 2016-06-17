@@ -41,9 +41,31 @@ Returns
 
 =cut
 
-sub find_option {
-    my ($self, $value) = @_;
 
+# 
+sub _option_popup {
+    my ($self) = @_;
+
+    return $self;
+}
+
+
+sub find_option {
+    my ($self, $text) = @_;
+    my $popup = $self->_option_popup;
+
+    $popup->find('*option', text => $text);
+}
+
+
+=item select_option
+
+=cut
+
+sub select_option {
+    my ($self, $text) = @_;
+
+    $self->find_option($text)->click;
 }
 
 
