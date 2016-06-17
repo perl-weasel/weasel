@@ -88,7 +88,20 @@ sub checkbox_expander {
     return ".//input[\@type='checkbox' $clause]";
 }
 
-=item labelled_expander
+=item contains_expander
+
+Finds tags containing 'text'
+
+=cut
+
+sub contains_expander {
+    my %args = @_;
+
+    my $text = $args{text};
+    return ".//*[contains(.,'$text')][not(.//*[contains(.,'$text')])]";
+}
+
+=item labeled_expander
 
 Finds tags for which a label has been set (using the label tag)
 
@@ -98,7 +111,7 @@ Criteria:
 
 =cut
 
-sub labelled_expander {
+sub labeled_expander {
     my %args = @_;
 
     my $tag = $args{tag_name} // '*';
@@ -236,7 +249,8 @@ sub text_expander {
 register_find_expander($_->{name}, 'HTML', $_->{expander})
     for ({  name => 'button',   expander => \&button_expander   },
          {  name => 'checkbox', expander => \&checkbox_expander },
-         {  name => 'labelled', expander => \&labelled_expander },
+         {  name => 'contains', expander => \&contains_expander },
+         {  name => 'labeled',  expander => \&labeled_expander },
          {  name => 'link',     expander => \&link_expander     },
          {  name => 'option',   expander => \&option_expander   },
          {  name => 'password', expander => \&password_expander },
