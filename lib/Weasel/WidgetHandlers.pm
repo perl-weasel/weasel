@@ -90,7 +90,7 @@ sub _cached_elem_att {
 
     return (exists $cache->{$att})
         ? $cache->{$att}
-        : ($cache->{$att} = $driver->get_attribute($_id));
+        : ($cache->{$att} = $driver->get_attribute($_id, $att));
 }
 
 sub best_match_handler_class {
@@ -129,14 +129,15 @@ sub best_match_handler_class {
 
             for my $att (keys %{$conditions->{attributes}}) {
                 next handler
-                    unless $conditions->{$att} eq _cached_elem_attr(
+                    unless $conditions->{attributes}->{$att}
+                      eq _cached_elem_att(
                         $elem_att_cache, $driver, $_id, $att);
                 $match_count++;
             }
 
             push @matches, {
                 count => $match_count,
-                handler => $handler,
+                class => $handler->{class},
             };
         }
     }
