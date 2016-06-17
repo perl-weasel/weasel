@@ -104,6 +104,16 @@ sub _page_builder {
 
 =over
 
+=item click([$element])
+
+=cut
+
+sub click {
+    my ($self, $element) = @_;
+
+    $self->driver->click(($element) ? $element->_id : undef);
+}
+
 =item find($element, $pattern, $args)
 
 =cut
@@ -119,6 +129,7 @@ sub find {
         }
         catch {
             ###TODO add logger statement warning of consumed error
+            print STDERR $_ . "\n";
         };
         return $rv = shift @rv;
 
@@ -140,6 +151,8 @@ sub find_all {
         $self->driver->find_all($element->_id,
                                 $expanded_pattern,
                                 $args{scheme});
+    print STDERR "found " . scalar(@rv) . " elements for $pattern " . (join(', ', %args)) . "\n";
+    print STDERR ' - ' . ref($_) . "\n" for (@rv);
     return wantarray ? @rv : \@rv;
 }
 
@@ -168,6 +181,16 @@ sub screenshot {
     my ($self, $fh) = @_;
 
     $self->driver->screenshot($fh);
+}
+
+=item send_keys($element, @keys)
+
+=cut
+
+sub send_keys {
+    my ($self, $element, @keys) = @_;
+
+    $self->driver->send_keys($element->_id, @keys);
 }
 
 =item wait_for($callback)
