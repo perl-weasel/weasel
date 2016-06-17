@@ -96,6 +96,14 @@ sub get {
     croak "Abstract interface method 'get' called";
 }
 
+=item is_displayed($element_id)
+
+=cut
+
+sub is_displayed {
+    croak "Abstract interface method 'is_displayed' called";
+}
+
 =item wait_for( $callback )
 
 =cut
@@ -132,6 +140,14 @@ sub dblclick {
 
 sub get_attribute {
     croak "Abstract interface method 'get_attribute' called";
+}
+
+=item get_text($element_id)
+
+=cut
+
+sub get_text {
+    croak "Abstract interface method 'get_text' called";
 }
 
 =item set_attribute($element_id, $attribute_name, $value)

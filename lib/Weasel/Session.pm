@@ -152,7 +152,7 @@ sub find_all {
                                 $expanded_pattern,
                                 $args{scheme});
     print STDERR "found " . scalar(@rv) . " elements for $pattern " . (join(', ', %args)) . "\n";
-    print STDERR ' - ' . ref($_) . "\n" for (@rv);
+    print STDERR ' - ' . ref($_) . " (" . $_->tag_name . ")\n" for (@rv);
     return wantarray ? @rv : \@rv;
 }
 
@@ -173,6 +173,36 @@ sub get {
     $self->driver->get($url);
 }
 
+=item get_attribute($element, $attribute)
+
+=cut
+
+sub get_attribute {
+    my ($self, $element, $attribute) = @_;
+
+    return $self->driver->get_attribute($element->_id, $attribute);
+}
+
+=item get_text($element)
+
+=cut
+
+sub get_text {
+    my ($self, $element) = @_;
+
+    return $self->driver->get_text($element->_id);
+}
+
+=item is_displayed($element)
+
+=cut
+
+sub is_displayed {
+    my ($self, $element) = @_;
+
+    return $self->driver->is_displayed($element->_id);
+}
+
 =item screenshot($fh)
 
 =cut
@@ -191,6 +221,16 @@ sub send_keys {
     my ($self, $element, @keys) = @_;
 
     $self->driver->send_keys($element->_id, @keys);
+}
+
+=item tag_name($element)
+
+=cut
+
+sub tag_name {
+    my ($self, $element) = @_;
+
+    return $self->driver->tag_name($element->_id);
 }
 
 =item wait_for($callback)

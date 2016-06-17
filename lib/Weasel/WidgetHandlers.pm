@@ -93,6 +93,12 @@ sub _cached_elem_att {
         : ($cache->{$att} = $driver->get_attribute($_id, $att));
 }
 
+sub _att_eq {
+    my ($att1, $att2) = @_;
+
+    return ($att1 // '') eq ($att2 // '');
+}
+
 sub best_match_handler_class {
     my ($driver, $_id, $groups) = @_;
 
@@ -115,7 +121,7 @@ sub best_match_handler_class {
 
             if (exists $conditions->{classes}) {
                 %{$elem_classes} =
-                    map { $_ => 1 }
+                   map { $_ => 1 }
                    split /\s+/, ($driver->get_attribute($_id, 'class')
                                  // '')
                        unless defined $elem_classes;
@@ -129,9 +135,10 @@ sub best_match_handler_class {
 
             for my $att (keys %{$conditions->{attributes}}) {
                 next handler
-                    unless $conditions->{attributes}->{$att}
-                      eq _cached_elem_att(
-                        $elem_att_cache, $driver, $_id, $att);
+                    unless _att_eq(
+                        $conditions->{attributes}->{$att},
+                        _cached_elem_att(
+                            $elem_att_cache, $driver, $_id, $att));
                 $match_count++;
             }
 

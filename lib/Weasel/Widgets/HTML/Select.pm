@@ -54,7 +54,7 @@ sub find_option {
     my ($self, $text) = @_;
     my $popup = $self->_option_popup;
 
-    $popup->find('*option', text => $text);
+    return $popup->find('*option', text => $text);
 }
 
 

@@ -73,7 +73,7 @@ sub expand_finder_pattern {
     my ($pattern, $args, $groups) = @_;
 
     return $pattern
-        if ! ($pattern =~ m/\*([^\|]+)/);
+        if ! ($pattern =~ m/^\*([^\|]+)/);
     my $name = $1;
 
     croak "No expansions registered (while expanding '$pattern')"

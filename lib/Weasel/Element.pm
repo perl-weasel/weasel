@@ -70,6 +70,37 @@ sub find_all {
     return $self->session->find_all($self, @args);
 }
 
+=item get_attribute($attribute)
+
+=cut
+
+sub get_attribute {
+    my ($self, $attribute) = @_;
+
+    return $self->session->get_attribute($self, $attribute);
+}
+
+=item get_text()
+
+=cut
+
+sub get_text {
+    my ($self) = @_;
+
+    return $self->session->get_text($self);
+}
+
+
+=item is_displayed
+
+=cut
+
+sub is_displayed {
+    my ($self) = @_;
+
+    return $self->session->is_displayed($self);
+}
+
 =item click()
 
 =cut
@@ -87,6 +118,16 @@ sub send_keys {
     my ($self, @keys) = @_;
 
     $self->session->send_keys($self, @keys);
+}
+
+=item tag_name()
+
+=cut
+
+sub tag_name {
+    my ($self) = @_;
+
+    return $self->session->tag_name($self);
 }
 
 =back
