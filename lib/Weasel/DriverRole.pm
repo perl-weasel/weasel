@@ -166,6 +166,14 @@ sub screenshot {
     croak "Abstract interface method 'screenshot' called";
 }
 
+=item send_keys($element_id, @keys)
+
+=cut
+
+sub send_keys {
+    croak "Abstract interface method 'send_keys' called";
+}
+
 =item tag_name($element_id)
 
 =cut
