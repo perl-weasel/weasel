@@ -113,6 +113,17 @@ sub wait_for {
 }
 
 
+=item clear($element_id)
+
+Clicks on an element if an element id is provided, or on the current
+mouse location otherwise.
+
+=cut
+
+sub clear {
+    croak "Abstract interface method 'clear' called";
+}
+
 =item click( [ $element_id ] )
 
 Clicks on an element if an element id is provided, or on the current

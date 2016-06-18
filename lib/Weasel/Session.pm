@@ -104,6 +104,16 @@ sub _page_builder {
 
 =over
 
+=item clear($element)
+
+=cut
+
+sub clear {
+    my ($self, $element) = @_;
+
+    $self->driver->clear($element->_id);
+}
+
 =item click([$element])
 
 =cut

@@ -45,6 +45,16 @@ register_widget_handler(
 
 =over
 
+=item clear()
+
+=cut
+
+sub clear {
+    my ($self) = @_;
+
+    $self->session->clear($self);
+}
+
 =item value([$value])
 
 Gets the 'value' attribute; if C<$value> is provided, it is used to set the
