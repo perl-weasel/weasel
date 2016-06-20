@@ -97,6 +97,30 @@ sub _page_builder {
 }
 
 
+=item retry_timeout
+
+The number of seconds to poll for a condition to become true. Global
+setting for the C<wait_for> function.
+
+=cut
+
+has 'retry_timeout' => (is => 'rw',
+                        default => 15,
+                        isa => 'Num',
+    );
+
+=item poll_delay
+
+The number of seconds to wait between state polling attempts. Global
+setting for the C<wait_for> function.
+
+=cut
+
+has 'poll_delay' => (is => 'rw',
+                     default => 0.5,
+                     isa => 'Num',
+    );
+
 =back
 
 =head1 METHODS
@@ -243,17 +267,23 @@ sub tag_name {
     return $self->driver->tag_name($element->_id);
 }
 
-=item wait_for($callback)
+=item wait_for($callback, [ retry_timeout => $number,] [poll_delay => number])
 
-Waits until $callback->() returns true, or C<wait_timeout> expires
-(if the driver supports it) -- whichever comes first.x
+Waits until $callback->() returns true, or C<wait_timeout> expires -- whichever
+comes first.
+
+The arguments retry_timeout and poll_delay can be used to override the
+session-global settings for the duration of the call.
 
 =cut
 
 sub wait_for {
-    my ($self, $callback) = @_;
+    my ($self, $callback, %args) = @_;
 
-    $self->driver->wait_for($callback);
+    $self->driver->wait_for($callback,
+                            retry_timeout => $self->retry_timeout,
+                            poll_delay => $self->poll_delay,
+                            %args);
 }
 
 =item _wrap_widget($_id)

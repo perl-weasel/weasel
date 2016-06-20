@@ -104,7 +104,13 @@ sub is_displayed {
     croak "Abstract interface method 'is_displayed' called";
 }
 
-=item wait_for( $callback )
+=item wait_for( $callback, retry_timeout => $num, poll_delay => $num )
+
+The driver may interpret the 'poll_delay' in one of two ways:
+ 1. The 'poll_delay' equals the number of seconds between the start of
+    successive poll requests
+ 2. The 'poll_delay' equals the number of seconds to wait between the end
+    of one poll request and the start of the next
 
 =cut
 
