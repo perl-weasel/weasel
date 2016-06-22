@@ -38,13 +38,11 @@ use warnings;
 
 use Moose;
 
-use Try::Tiny;
 use Weasel::Element::Document;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
 =head1 ATTRIBUTES
-
 
 =over
 
@@ -83,6 +81,8 @@ has 'base_url' => (is => 'rw',
                    default => '' );
 
 =item page
+
+Returns the root element of the target HTML page (the 'html' tag).
 
 =cut
 
@@ -130,6 +130,9 @@ has 'poll_delay' => (is => 'rw',
 
 =item clear($element)
 
+Clears any input entered into elements supporting it.  Generally applies to
+textarea elements and input elements of type text and password.
+
 =cut
 
 sub clear {
@@ -140,6 +143,10 @@ sub clear {
 
 =item click([$element])
 
+Simulates a single mouse click. If an element argument is provided, that
+element is clicked.  Otherwise, the browser window is clicked at the
+current mouse location.
+
 =cut
 
 sub click {
@@ -148,7 +155,11 @@ sub click {
     $self->driver->click(($element) ? $element->_id : undef);
 }
 
-=item find($element, $pattern, $args)
+=item find($element, $locator [, scheme => $scheme] [, %locator_args])
+
+Finds the first child of C<$element> matching C<$locator>.
+
+See L<Weasel::Element>'s C<find> function for more documentation.
 
 =cut
 
@@ -156,23 +167,22 @@ sub find {
     my ($self, @args) = @_;
     my $rv;
 
-    $self->wait_for( sub {
-        my @rv;
-        try {
-            @rv =  @{$self->find_all(@args)};
-        }
-        catch {
-            ###TODO add logger statement warning of consumed error
-            print STDERR $_ . "\n";
-        };
-        return $rv = shift @rv;
-
-                     });
+    $self->wait_for(
+        sub {
+            my @rv = @{$self->find_all(@args)};
+            return $rv = shift @rv;
+        });
 
     return $rv;
 }
 
-=item find_all($element, $pattern, $args)
+=item find_all($element, $locator, [, scheme => $scheme] [, %locator_args ])
+
+Finds all child elements of C<$element> matching C<$locator>. Returns,
+depending on scalar or list context, an arrayref or a list with matching
+elements.
+
+See L<Weasel::Element>'s C<find_all> function for more documentation.
 
 =cut
 
@@ -209,6 +219,9 @@ sub get {
 
 =item get_attribute($element, $attribute)
 
+Returns the value of the attribute named by C<$attribute> of the element
+identified by C<$element>, or C<undef> if the attribute isn't defined.
+
 =cut
 
 sub get_attribute {
@@ -218,6 +231,8 @@ sub get_attribute {
 }
 
 =item get_text($element)
+
+Returns the 'innerHTML' of the element identified by C<$element>.
 
 =cut
 
@@ -229,6 +244,10 @@ sub get_text {
 
 =item is_displayed($element)
 
+Returns a boolean value indicating if the element identified by
+C<$element> is visible on the page, i.e. that it can be scrolled into
+the viewport for interaction.
+
 =cut
 
 sub is_displayed {
@@ -238,6 +257,12 @@ sub is_displayed {
 }
 
 =item screenshot($fh)
+
+Writes a screenshot of the browser's window to the filehandle C<$fh>.
+
+Note: this version assumes pictures of type PNG will be written;
+  later versions may provide a means to query the exact image type of
+  screenshots being generated.
 
 =cut
 
@@ -249,6 +274,9 @@ sub screenshot {
 
 =item send_keys($element, @keys)
 
+Send the characters specified in the strings in C<@keys> to C<$element>,
+simulating keyboard input.
+
 =cut
 
 sub send_keys {
@@ -259,6 +287,8 @@ sub send_keys {
 
 =item tag_name($element)
 
+Returns the tag name of the element identified by C<$element>.
+
 =cut
 
 sub tag_name {
@@ -267,13 +297,13 @@ sub tag_name {
     return $self->driver->tag_name($element->_id);
 }
 
-=item wait_for($callback, [ retry_timeout => $number,] [poll_delay => number])
+=item wait_for($callback, [ retry_timeout => $number,] [poll_delay => $number])
 
-Waits until $callback->() returns true, or C<wait_timeout> expires -- whichever
-comes first.
+Polls $callback->() until it returns true, or C<wait_timeout> expires
+-- whichever comes first.
 
 The arguments retry_timeout and poll_delay can be used to override the
-session-global settings for the duration of the call.
+session-global settings.
 
 =cut
 
@@ -288,10 +318,10 @@ sub wait_for {
 
 =item _wrap_widget($_id)
 
-Finds all matching widget selectors to instantiate an element off of.
+Finds all matching widget selectors to wrap the driver element in.
 
 In case of multiple matches, selects the most specific match
-(most matched criteria).
+(the one with the highest number of requirements).
 
 =cut
 
