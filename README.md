@@ -69,9 +69,10 @@ With
                               [not(.//*[contains(.,'Some text')])]");
 ```
 
-Multiple patterns can be registered for a single mnemonic, which
-will be concatenated to a single xpath expression to find the matching
-tags in a single driver query.
+Multiple patterns can be registered for a single mnemonic. These
+which be concatenated into a single xpath expression. This concatenated
+expression allows to efficiently find matching elemnets with a single
+driver query.
 
 Besides good performance, this has the benefit that the following
 
@@ -80,9 +81,10 @@ Besides good performance, this has the benefit that the following
 ```
 
 can be easily extended to match
-[Dojo toolkit's](http://dojotoolkit.org/documentation/) buttons, which
-on the HTML level don't contain visible button or input tags, simply
-by using the widget support set:
+[Dojo toolkit's](http://dojotoolkit.org/documentation/) buttons as well
+as regular buttens. The problem with Dojo's buttons is that their DOM
+tree doesn't actually contain (visible) BUTTON or INPUT tags. To load
+support for Dojo widgets, simply:
 
 ```perl
    use Weasel::Widgets::Dojo;
