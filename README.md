@@ -123,6 +123,12 @@ methods.
   $ cpanm Weasel::Driver::Selenium2
 ```
 
+If you want to use Weasel's support for Dojo-widget interaction, also:
+
+```sh
+  $ cpanm Weasel::Widgets::Dojo
+```
+
 If you want to use Weasel with its Pherkin (BDD) integration, also:
 
 ```sh
@@ -141,3 +147,16 @@ Bugs can be filed in the GitHub issue tracker for the Weasel project:
 Community support is available through
 [perl-weasel@googlegroups.com](mailto:perl-weasel@googlegroups.com).
 
+Chat support is available in the
+[#perl-weasel:matrix.org](https://vector.im/beta/#/room/#perl-weasel:matrix.org)
+channel
+
+# COPYRIGHT
+
+```
+Copyright (c)  2016  Erik Huelsmann
+```
+
+# LICENSE
+
+Same as Perl
