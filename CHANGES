@@ -1,4 +1,7 @@
 
- ** 0.01 / 2016-06-??
+** 0.02 / 2016-06-22 (TRIAL)
+   - Adjusted dependencies based on testing in clean VM
+
+** 0.01 / 2016-06-22 (TRIAL)
   - Initial release to replace LedgerSMB's
     (https://github.com/ledgersmb/LedgerSMB) test code
