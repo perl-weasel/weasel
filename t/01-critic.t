@@ -36,6 +36,9 @@ test_files(Perl::Critic->new(
                -profile => 't/perlcriticrc',
                -severity => 5,
                -theme => '',
+               -exclude => [
+                    'OTRS::',  # some CPANtesters use this by default
+               ],
                -include => [
 #                    'Documentation::'
                ]),
