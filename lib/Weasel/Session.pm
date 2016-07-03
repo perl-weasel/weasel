@@ -38,7 +38,7 @@ use warnings;
 
 use Moose;
 
-use Weasel::Element::Document;
+use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
@@ -82,7 +82,7 @@ has 'base_url' => (is => 'rw',
 
 =item page
 
-Returns the root element of the target HTML page (the 'html' tag).
+Holds the root element of the target HTML page (the 'html' tag).
 
 =cut
 
@@ -92,10 +92,21 @@ has 'page' => (is => 'ro',
 
 sub _page_builder {
     my $self = shift;
+    my $class = use_module($self->page_class);
 
-    return Weasel::Element::Document->new(session => $self);
+    return $class->new(session => $self);
 }
 
+=item page_class
+
+Upon instantiation can be set to an alternative class name for the C<page>
+attribute.
+
+=cut
+
+has 'page_class' => (is => 'ro',
+                     isa => 'Str',
+                     default => 'Weasel::Element::Document');
 
 =item retry_timeout
 
