@@ -5,7 +5,7 @@ Weasel - Perl's php/Mink-inspired abstracted web-driver framework
 
 =head1 VERSION
 
-0.01
+0.03
 
 =head1 SYNOPSIS
 
@@ -110,7 +110,7 @@ use warnings;
 
 use Moose;
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 =head1 ATTRIBUTES
 

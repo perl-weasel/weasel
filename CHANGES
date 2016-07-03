@@ -1,3 +1,6 @@
+** 0.03 / 2016-07-03
+   - Allow overriding the class of the object instantiated
+     into the 'page' attribute
 
 ** 0.02 / 2016-06-22 (TRIAL)
    - Adjusted dependencies based on testing in clean VM
