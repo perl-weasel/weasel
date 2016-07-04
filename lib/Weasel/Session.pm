@@ -88,7 +88,8 @@ Holds the root element of the target HTML page (the 'html' tag).
 
 has 'page' => (is => 'ro',
                isa => 'Weasel::Element::Document',
-               builder => '_page_builder');
+               builder => '_page_builder',
+               lazy => 1);
 
 sub _page_builder {
     my $self = shift;

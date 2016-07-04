@@ -1,3 +1,7 @@
+** 0.0. / 2016-07-04\
+   - Fix timing problem initializing Session's 'page' attribute
+     (depends on 'page_class') by making it lazy
+
 ** 0.03 / 2016-07-03
    - Allow overriding the class of the object instantiated
      into the 'page' attribute
