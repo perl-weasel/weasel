@@ -1,4 +1,10 @@
-** 0.0. / 2016-07-04\
+
+** 0.05 / 2016-07-08
+   - Change behaviour of Selectable widget (Radiobutton, Checkbox and Option)
+     to return the empty string (false) when not selected for the 'value'
+     attribute
+
+** 0.04 / 2016-07-04
    - Fix timing problem initializing Session's 'page' attribute
      (depends on 'page_class') by making it lazy
 

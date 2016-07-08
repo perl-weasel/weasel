@@ -56,12 +56,32 @@ sets the selected status.
 sub selected {
     my ($self, $value) = @_;
 
-    $self->session->set_selected($self, $value)
+    $self->session->set_attribute($self, 'selected', $value)
         if defined $value;
 
-    return $self->session->get_selected($self);
+    return $self->session->get_attribute($self, 'selected');
 }
 
+=item get_attribute($name)
 
+Returns the value of the attribute; when the element is I<not> selected,
+the 'value' attribute is overruled to return C<false> (an empty string).
+
+=cut
+
+sub get_attribute {
+    my ($self, $name) = @_;
+
+    if ($name eq 'value' && ! $self->selected) {
+        return ''; # false/ not selected
+    }
+    else {
+        return $self->SUPER::get_attribute($name);
+    }
+}
+
+=back
+
+=cut
 
 1;
