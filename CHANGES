@@ -1,4 +1,7 @@
 
+** 0.07 / 2016-08-20
+   - Correctly update the version numbers in lib/Weasel.pm
+
 ** 0.06 / 2016-08-20
    - Add key codes in order to send special keys to elements
    - Add helper method on elements: has_class
