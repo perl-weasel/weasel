@@ -1,4 +1,9 @@
 
+** 0.06 / 2016-08-20
+   - Add key codes in order to send special keys to elements
+   - Add helper method on elements: has_class
+   - Move development time tests to 'xt/' directory (fixes #1)
+
 ** 0.05 / 2016-07-08
    - Change behaviour of Selectable widget (Radiobutton, Checkbox and Option)
      to return the empty string (false) when not selected for the 'value'
