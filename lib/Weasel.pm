@@ -112,6 +112,80 @@ use Moose;
 
 our $VERSION = '0.05';
 
+# From https://w3c.github.io/webdriver/webdriver-spec.html#keyboard-actions
+my %key_codes = (
+    NULL            => "\N{U+E000}",
+    CANCEL          => "\N{U+E001}",
+    HELP            => "\N{U+E002}",
+    BACK_SPACE      => "\N{U+E003}",
+    TAB             => "\N{U+E004}",
+    CLEAR           => "\N{U+E005}",
+    RETURN          => "\N{U+E006}",
+    ENTER           => "\N{U+E007}",
+    SHIFT           => "\N{U+E008}",
+    CONTROL         => "\N{U+E009}",
+    ALT             => "\N{U+E00A}",
+    PAUSE           => "\N{U+E00B}",
+    ESCAPE          => "\N{U+E00C}",
+    SPACE           => "\N{U+E00D}",
+    PAGE_UP         => "\N{U+E00E}",
+    PAGE_DOWN       => "\N{U+E00F}",
+    'END'           => "\N{U+E010}",
+    HOME            => "\N{U+E011}",
+    ARROW_LEFT      => "\N{U+E012}",
+    ARROW_UP        => "\N{U+E013}",
+    ARROW_RIGHT     => "\N{U+E014}",
+    ARROW_DOWN      => "\N{U+E015}",
+    INSERT          => "\N{U+E016}",
+    DELETE          => "\N{U+E017}",
+    SEMICOLON       => "\N{U+E018}",
+    EQUALS          => "\N{U+E019}",
+    NUMPAD0         => "\N{U+E01A}",
+    NUMPAD1         => "\N{U+E01B}",
+    NUMPAD2         => "\N{U+E01C}",
+    NUMPAD3         => "\N{U+E01D}",
+    NUMPAD4         => "\N{U+E01E}",
+    NUMPAD5         => "\N{U+E01F}",
+    NUMPAD6         => "\N{U+E020}",
+    NUMPAD7         => "\N{U+E021}",
+    NUMPAD8         => "\N{U+E022}",
+    NUMPAD9         => "\N{U+E023}",
+    MULTIPLY        => "\N{U+E024}",
+    ADD             => "\N{U+E025}",
+    SEPARATOR       => "\N{U+E026}",
+    SUBTRACT        => "\N{U+E027}",
+    DECIMAL         => "\N{U+E028}",
+    DIVIDE          => "\N{U+E029}",
+    F1              => "\N{U+E031}",
+    F2              => "\N{U+E032}",
+    F3              => "\N{U+E033}",
+    F4              => "\N{U+E034}",
+    F5              => "\N{U+E035}",
+    F6              => "\N{U+E036}",
+    F7              => "\N{U+E037}",
+    F8              => "\N{U+E038}",
+    F9              => "\N{U+E039}",
+    F10             => "\N{U+E03A}",
+    F11             => "\N{U+E03B}",
+    F12             => "\N{U+E03C}",
+    META            => "\N{U+E03D}",
+    COMMAND         => "\N{U+E03D}",
+    ZENKAKU_HANKAKU => "\N{U+E040}",
+    );
+
+
+=item KEYS
+
+Returns a reference to a hash with names of the keys in the
+hash keys and single-character strings containing the key
+codes as the values.
+
+=cut
+
+sub KEYS {
+    return \%key_codes;
+}
+
 =head1 ATTRIBUTES
 
 
