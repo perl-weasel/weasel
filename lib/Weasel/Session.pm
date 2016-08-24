@@ -63,7 +63,11 @@ has 'driver' => (is => 'ro',
 
 =item widget_groups
 
-Contains the list of widget groups to be
+Contains the list of widget groups to be used with the session, or
+uses all groups when undefined.
+
+Note: this functionality allows to load multiple groups into the running
+perl instance, while using different groups in various sessions.
 
 =cut
 
