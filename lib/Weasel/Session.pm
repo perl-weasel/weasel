@@ -73,6 +73,9 @@ has 'widget_groups' => (is => 'rw');
 
 Holds the prefix that will be prepended to every URL passed
 to this API.
+The prefix can be an environment variable, e.g. ${VARIABLE}.
+It will be expanded and default to hppt://localhost:5000 if not defined.
+If it is not an environment variable, it will be used as is.
 
 =cut
 
@@ -223,7 +226,10 @@ after prefixing with C<base_url>.
 sub get {
     my ($self, $url) = @_;
 
-    $url = $self->base_url . $url;
+    my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
+             ? $ENV{$1} // "http://localhost:5000"
+             : $self->base_url;
+    $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
     # which might indicate empty 'base_url' where one is assumed to be set
     $self->driver->get($url);
