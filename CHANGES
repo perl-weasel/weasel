@@ -1,3 +1,5 @@
+** 0.06 / 2016-08-26
+   - Add the possibility to use environment variables for base_url
 
 ** 0.05 / 2016-07-08
    - Change behaviour of Selectable widget (Radiobutton, Checkbox and Option)
