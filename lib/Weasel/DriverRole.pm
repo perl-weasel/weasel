@@ -295,6 +295,13 @@ strings may be listed. In such cases the input will be appended. E.g.
 
 is valid input to enter the text "hello world" into C<$element_id>.
 
+
+Note: Special keys are encoded according to the WebDriver spec.
+ In case a driver implementation needs differentt encoding of
+ special keys, this function should recode from the values
+ found in WebDriver::KEYS() to the desired code-set
+
+
 =cut
 
 sub send_keys {
