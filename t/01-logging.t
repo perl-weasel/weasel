@@ -1,10 +1,15 @@
 #!perl
 
 
-use Data::Dumper;
 use Test::More;
 
+<<<<<<< HEAD
 package DummyDriver;
+=======
+package DummyDriver {
+    use Moose;
+    with 'Weasel::DriverRole';
+>>>>>>> 1666617... Remove spurious warning messages
 
 use Data::Dumper;
 use Moose;
