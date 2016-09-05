@@ -1,0 +1,18 @@
+
+language: perl
+perl:
+ - "5.10"
+ - "5.12"
+ - "5.14"
+ - "5.16"
+ - "5.18"
+ - "5.20"
+ - "5.22"
+ - "5.24"
+
+install:
+  - dzil authordeps --missing | cpanm --no-skip-satisfied
+  - dzil listdeps --author --missing | cpanm --no-skip-satisfied
+
+script:
+  - dzil test --author --release

@@ -1,3 +1,6 @@
+** 0.09 / 2016-09-04
+   - Set the correct version number in Weasel.pm
+
 ** 0.08 / 2016-08-26
    - Add the possibility to use environment variables for base_url
 
