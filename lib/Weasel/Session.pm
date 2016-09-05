@@ -344,6 +344,18 @@ sub screenshot {
         }, 'screenshot', 'screenshot');
 }
 
+=item get_page_source($fh)
+
+Writes a get_page_source of the browser's window to the filehandle C<$fh>.
+
+=cut
+
+sub get_page_source {
+    my ($self) = @_;
+
+    return $self->driver->get_page_source();
+}
+
 =item send_keys($element, @keys)
 
 Send the characters specified in the strings in C<@keys> to C<$element>,
@@ -358,7 +370,7 @@ sub send_keys {
         sub {
             $self->driver->send_keys($element->_id, @keys);
         },
-        'send_keys', 'sending keys: ' . join('', @keys));
+        'send_keys', 'sending keys: ' . join('', @keys // ()));
 }
 
 =item tag_name($element)

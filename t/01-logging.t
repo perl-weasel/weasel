@@ -1,11 +1,9 @@
 #!perl
 
 
-use Data::Dumper;
 use Test::More;
 
 package DummyDriver {
-    use Data::Dumper;
     use Moose;
     with 'Weasel::DriverRole';
 
