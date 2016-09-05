@@ -214,8 +214,8 @@ sub find_all {
         $self->driver->find_all($element->_id,
                                 $expanded_pattern,
                                 $args{scheme});
-    print STDERR "found " . scalar(@rv) . " elements for $pattern " . (join(', ', %args)) . "\n";
-    print STDERR ' - ' . ref($_) . " (" . $_->tag_name . ")\n" for (@rv);
+
+
     return wantarray ? @rv : \@rv;
 }
 
@@ -292,6 +292,18 @@ sub screenshot {
     my ($self, $fh) = @_;
 
     $self->driver->screenshot($fh);
+}
+
+=item get_page_source($fh)
+
+Writes a get_page_source of the browser's window to the filehandle C<$fh>.
+
+=cut
+
+sub get_page_source {
+    my ($self) = @_;
+
+    return $self->driver->get_page_source();
 }
 
 =item send_keys($element, @keys)
