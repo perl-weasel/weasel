@@ -42,6 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
+
 =head1 ATTRIBUTES
 
 =over
@@ -115,6 +116,7 @@ Upon instantiation can be set to log consumer; a function of 3 arguments:
 
 has 'log_hook' => (is => 'ro',
                    isa => 'Maybe[CodeRef]');
+
 =item page_class
 
 Upon instantiation can be set to an alternative class name for the C<page>
@@ -152,6 +154,7 @@ has 'poll_delay' => (is => 'rw',
 
 =back
 
+
 =head1 METHODS
 
 
@@ -184,7 +187,7 @@ sub click {
 
     $self->_logged(
         sub {
-    $self->driver->click(($element) ? $element->_id : undef);
+            $self->driver->click(($element) ? $element->_id : undef);
         },
         'click', ($element) ? 'clicking element' : 'clicking window');
 }
@@ -203,11 +206,11 @@ sub find {
 
     $self->_logged(
         sub {
-    $self->wait_for(
-        sub {
-            my @rv = @{$self->find_all(@args)};
-            return $rv = shift @rv;
-        });
+            $self->wait_for(
+                sub {
+                    my @rv = @{$self->find_all(@args)};
+                    return $rv = shift @rv;
+                });
         }, 'find', 'find ' . $args[1]);
 
     return $rv;
@@ -230,10 +233,10 @@ sub find_all {
     my @rv = $self->_logged(
         sub {
             return
-        map { $self->_wrap_widget($_) }
-        $self->driver->find_all($element->_id,
-                                $expanded_pattern,
-                                $args{scheme});
+                map { $self->_wrap_widget($_) }
+                $self->driver->find_all($element->_id,
+                                        $expanded_pattern,
+                                        $args{scheme});
         },
         'find_all',
         sub {
@@ -245,6 +248,7 @@ sub find_all {
                                   . ' (' . $_->tag_name . ")" } @$rv));
         },
         "pattern: $pattern");
+
     return wantarray ? @rv : \@rv;
 }
 
@@ -283,7 +287,7 @@ sub get_attribute {
 
     return $self->_logged(
         sub {
-    return $self->driver->get_attribute($element->_id, $attribute);
+            return $self->driver->get_attribute($element->_id, $attribute);
         }, 'get_attribute', "element attribute '$attribute'");
 }
 
@@ -298,7 +302,7 @@ sub get_text {
 
     return $self->_logged(
         sub {
-    return $self->driver->get_text($element->_id);
+            return $self->driver->get_text($element->_id);
         },
         'get_text', 'element text');
 }
@@ -316,7 +320,7 @@ sub is_displayed {
 
     return $self->_logged(
         sub {
-    return $self->driver->is_displayed($element->_id);
+            return $self->driver->is_displayed($element->_id);
         },
         'is_displayed', 'query is_displayed');
 }
@@ -336,7 +340,7 @@ sub screenshot {
 
     $self->_logged(
         sub {
-    $self->driver->screenshot($fh);
+            $self->driver->screenshot($fh);
         }, 'screenshot', 'screenshot');
 }
 
@@ -364,7 +368,7 @@ sub send_keys {
 
     $self->_logged(
         sub {
-    $self->driver->send_keys($element->_id, @keys);
+            $self->driver->send_keys($element->_id, @keys);
         },
         'send_keys', 'sending keys: ' . join('', @keys));
 }
@@ -399,13 +403,15 @@ sub wait_for {
 
     $self->_logged(
         sub {
-    $self->driver->wait_for($callback,
-                            retry_timeout => $self->retry_timeout,
-                            poll_delay => $self->poll_delay,
-                            %args);
+            $self->driver->wait_for($callback,
+                                    retry_timeout => $self->retry_timeout,
+                                    poll_delay => $self->poll_delay,
+                                    %args);
         },
         'wait_for', 'waiting for condition');
 }
+
+
 sub _appending_wrap {
     my ($str) = @_;
     return sub {
