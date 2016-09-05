@@ -370,7 +370,7 @@ sub send_keys {
         sub {
             $self->driver->send_keys($element->_id, @keys);
         },
-        'send_keys', 'sending keys: ' . join('', @keys));
+        'send_keys', 'sending keys: ' . join('', @keys // ()));
 }
 
 =item tag_name($element)
