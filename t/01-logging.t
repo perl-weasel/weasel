@@ -4,26 +4,28 @@
 use Data::Dumper;
 use Test::More;
 
-package DummyDriver {
-    use Data::Dumper;
-    use Moose;
-    with 'Weasel::DriverRole';
+package DummyDriver;
 
-    sub tag_name {
-        my ($self, $tag) = @_;
+use Data::Dumper;
+use Moose;
+with 'Weasel::DriverRole';
 
-        return $tag->{tag};
-    }
+sub tag_name {
+    my ($self, $tag) = @_;
 
-    sub find_all {
-        my @rv = (
-            { tag => 'span' },
-            { tag => 'span' },
-            );
-
-        return (wantarray) ? @rv : \@rv;
-    }
+    return $tag->{tag};
 }
+
+sub find_all {
+    my @rv = (
+        { tag => 'span' },
+        { tag => 'span' },
+        );
+
+    return (wantarray) ? @rv : \@rv;
+}
+
+package main;
 
 use Weasel;
 use Weasel::Session;
