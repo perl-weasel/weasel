@@ -5,7 +5,7 @@ Weasel::DriverRole - API definition for driver wrappers
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ use warnings;
 use Carp;
 use Moose::Role;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 ATTRIBUTES
 
@@ -230,6 +230,16 @@ of the element indicated by C<$element_id>.
 
 sub get_attribute {
     croak "Abstract interface method 'get_attribute' called";
+}
+
+=item get_page_source($fh)
+
+Writes a get_page_source of the browser's window to the filehandle C<$fh>.
+
+=cut
+
+sub get_page_source {
+    croak "Abstract interface method 'get_page_source' called";
 }
 
 =item get_text($element_id)
