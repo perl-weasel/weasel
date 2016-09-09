@@ -42,7 +42,6 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-
 =head1 ATTRIBUTES
 
 =over
@@ -154,7 +153,6 @@ has 'poll_delay' => (is => 'rw',
 
 =back
 
-
 =head1 METHODS
 
 
@@ -248,7 +246,6 @@ sub find_all {
                                   . ' (' . $_->tag_name . ")" } @$rv));
         },
         "pattern: $pattern");
-
     return wantarray ? @rv : \@rv;
 }
 
@@ -344,6 +341,21 @@ sub screenshot {
         }, 'screenshot', 'screenshot');
 }
 
+=item get_page_source($fh)
+
+Writes a get_page_source of the browser's window to the filehandle C<$fh>.
+
+=cut
+
+sub get_page_source {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->get_page_source();
+        }, 'get_page_source', 'get_page_source');
+}
+
 =item send_keys($element, @keys)
 
 Send the characters specified in the strings in C<@keys> to C<$element>,
@@ -358,7 +370,7 @@ sub send_keys {
         sub {
             $self->driver->send_keys($element->_id, @keys);
         },
-        'send_keys', 'sending keys: ' . join('', @keys));
+        'send_keys', 'sending keys: ' . join('', @keys // ()));
 }
 
 =item tag_name($element)
@@ -400,6 +412,16 @@ sub wait_for {
 }
 
 
+before 'BUILDARGS', sub {
+    my ($class, @args) = @_;
+    my $args = (ref $args[0]) ? $args[0] : { @args };
+
+    confess "Driver used to construct session object uses old API version;
+some functionality may not work correctly"
+        if ($args->{driver}
+            && $args->{driver}->implements < $Weasel::DriverRole::VERSION);
+};
+
 sub _appending_wrap {
     my ($str) = @_;
     return sub {
@@ -412,6 +434,7 @@ sub _appending_wrap {
         }
     }
 }
+
 =item _logged($wrapped_fn, $event, $log_item, $log_item_pre)
 
 Invokes C<log_hook> when it's defined, before and after calling C<$wrapped_fn>
@@ -421,11 +444,12 @@ C<$log_item> can be a fixed string or a function of one argument returning
 the string to be logged. The argument passed into the function is the value
 returned by the C<$wrapped_fn>.
 
-In case there is no C<$log_item_pre> to be called on the 'pre_' event, C<$log_item>
-will be used instead, with no arguments.
+In case there is no C<$log_item_pre> to be called on the 'pre_' event,
+C<$log_item> will be used instead, with no arguments.
 
-For performance reasons, the C<$log_item> and C<$log_item_pre> - when coderefs - aren't
-called; instead they are passed as-is to the C<$log_hook> for lazy evaluation.
+For performance reasons, the C<$log_item> and C<$log_item_pre> - when
+coderefs - aren't called; instead they are passed as-is to the
+C<$log_hook> for lazy evaluation.
 
 =cut
 
