@@ -115,6 +115,7 @@ Upon instantiation can be set to log consumer; a function of 3 arguments:
 
 has 'log_hook' => (is => 'ro',
                    isa => 'Maybe[CodeRef]');
+
 =item page_class
 
 Upon instantiation can be set to an alternative class name for the C<page>
@@ -409,6 +410,18 @@ sub wait_for {
         },
         'wait_for', 'waiting for condition');
 }
+
+
+before 'BUILDARGS', sub {
+    my ($class, @args) = @_;
+    my $args = (ref $args[0]) ? $args[0] : { @args };
+
+    confess "Driver used to construct session object uses old API version;
+some functionality may not work correctly"
+        if ($args->{driver}
+            && $args->{driver}->implements < $Weasel::DriverRole::VERSION);
+};
+
 sub _appending_wrap {
     my ($str) = @_;
     return sub {
@@ -421,6 +434,7 @@ sub _appending_wrap {
         }
     }
 }
+
 =item _logged($wrapped_fn, $event, $log_item, $log_item_pre)
 
 Invokes C<log_hook> when it's defined, before and after calling C<$wrapped_fn>
@@ -430,11 +444,12 @@ C<$log_item> can be a fixed string or a function of one argument returning
 the string to be logged. The argument passed into the function is the value
 returned by the C<$wrapped_fn>.
 
-In case there is no C<$log_item_pre> to be called on the 'pre_' event, C<$log_item>
-will be used instead, with no arguments.
+In case there is no C<$log_item_pre> to be called on the 'pre_' event,
+C<$log_item> will be used instead, with no arguments.
 
-For performance reasons, the C<$log_item> and C<$log_item_pre> - when coderefs - aren't
-called; instead they are passed as-is to the C<$log_hook> for lazy evaluation.
+For performance reasons, the C<$log_item> and C<$log_item_pre> - when
+coderefs - aren't called; instead they are passed as-is to the
+C<$log_hook> for lazy evaluation.
 
 =cut
 

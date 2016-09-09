@@ -10,6 +10,10 @@ use Data::Dumper;
 use Moose;
 with 'Weasel::DriverRole';
 
+sub implements {
+    return $Weasel::DriverRole::VERSION;
+}
+
 sub tag_name {
     my ($self, $tag) = @_;
 
