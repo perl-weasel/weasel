@@ -1,3 +1,8 @@
+** 0.10 / 2016-09-09
+   - Repair <5.14 compatibility
+   - Add new 'get_page_source' api to the driver
+   - Add driver API version check during session creation
+
 ** 0.09 / 2016-09-04
    - Set the correct version number in Weasel.pm
 
