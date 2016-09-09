@@ -42,7 +42,6 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-
 =head1 ATTRIBUTES
 
 =over
@@ -116,7 +115,6 @@ Upon instantiation can be set to log consumer; a function of 3 arguments:
 
 has 'log_hook' => (is => 'ro',
                    isa => 'Maybe[CodeRef]');
-
 =item page_class
 
 Upon instantiation can be set to an alternative class name for the C<page>
@@ -153,7 +151,6 @@ has 'poll_delay' => (is => 'rw',
     );
 
 =back
-
 
 =head1 METHODS
 
@@ -248,7 +245,6 @@ sub find_all {
                                   . ' (' . $_->tag_name . ")" } @$rv));
         },
         "pattern: $pattern");
-
     return wantarray ? @rv : \@rv;
 }
 
@@ -344,6 +340,21 @@ sub screenshot {
         }, 'screenshot', 'screenshot');
 }
 
+=item get_page_source($fh)
+
+Writes a get_page_source of the browser's window to the filehandle C<$fh>.
+
+=cut
+
+sub get_page_source {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->get_page_source();
+        }, 'get_page_source', 'get_page_source');
+}
+
 =item send_keys($element, @keys)
 
 Send the characters specified in the strings in C<@keys> to C<$element>,
@@ -358,7 +369,7 @@ sub send_keys {
         sub {
             $self->driver->send_keys($element->_id, @keys);
         },
-        'send_keys', 'sending keys: ' . join('', @keys));
+        'send_keys', 'sending keys: ' . join('', @keys // ()));
 }
 
 =item tag_name($element)
@@ -398,8 +409,6 @@ sub wait_for {
         },
         'wait_for', 'waiting for condition');
 }
-
-
 sub _appending_wrap {
     my ($str) = @_;
     return sub {
