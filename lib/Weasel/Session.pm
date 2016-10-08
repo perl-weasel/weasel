@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.02
+0.04
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.02';
+our $VERSION = '0.04';
 
 
 =head1 ATTRIBUTES
@@ -266,6 +266,7 @@ sub get {
     my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
              ? $ENV{$1} // "http://localhost:5000"
              : $self->base_url;
+
     $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
     # which might indicate empty 'base_url' where one is assumed to be set
@@ -351,11 +352,11 @@ Writes a get_page_source of the browser's window to the filehandle C<$fh>.
 =cut
 
 sub get_page_source {
-    my ($self) = @_;
+    my ($self,$fh) = @_;
 
     $self->_logged(
         sub {
-            $self->driver->get_page_source();
+            $self->driver->get_page_source($fh);
         }, 'get_page_source', 'get_page_source');
 }
 
@@ -412,6 +413,28 @@ sub wait_for {
                                     %args);
         },
         'wait_for', 'waiting for condition');
+}
+
+
+=item wait_until($callback)
+
+Polls $callback->() until it returns true, or C<wait_timeout> expires
+-- whichever comes first.
+
+The arguments retry_timeout and poll_delay can be used to override the
+session-global settings.
+
+=cut
+
+sub wait_until {
+    my ($self, $callback, %args) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->wait_until($callback,
+                                    %args);
+        },
+        'wait_until', 'waiting for condition');
 }
 
 
