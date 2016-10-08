@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 ATTRIBUTES
@@ -413,6 +413,28 @@ sub wait_for {
                                     %args);
         },
         'wait_for', 'waiting for condition');
+}
+
+
+=item wait_until($callback)
+
+Polls $callback->() until it returns true, or C<wait_timeout> expires
+-- whichever comes first.
+
+The arguments retry_timeout and poll_delay can be used to override the
+session-global settings.
+
+=cut
+
+sub wait_until {
+    my ($self, $callback, %args) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->wait_until($callback,
+                                    %args);
+        },
+        'wait_until', 'waiting for condition');
 }
 
 

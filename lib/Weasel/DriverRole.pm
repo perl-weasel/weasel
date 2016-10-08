@@ -5,7 +5,7 @@ Weasel::DriverRole - API definition for driver wrappers
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ use warnings;
 use Carp;
 use Moose::Role;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 ATTRIBUTES
 
@@ -188,6 +188,15 @@ sub wait_for {
     croak "Abstract interface method 'wait_for' called";
 }
 
+=item wait_until
+
+Selenium::Waiter::wait_until with exceptions
+
+=cut
+
+sub wait_until {
+    croak "Abstract interface method 'wait_until' called";
+}
 
 =item clear($element_id)
 
