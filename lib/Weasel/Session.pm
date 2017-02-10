@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.04
+0.05
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 =head1 ATTRIBUTES
@@ -390,6 +390,24 @@ sub tag_name {
          'tag_name',
          sub { my $tag = shift; return "found tag with name $tag" },
          'getting tag name');
+}
+
+=item wait_for_stale($link)
+
+Returns the tag name of the element identified by C<$element>.
+
+=cut
+
+sub wait_for_stale {
+    my ($self, $link) = @_;
+
+    $self->_logged(
+        sub { 
+            $self->driver->wait_for_stale($link,
+                                    retry_timeout => $self->retry_timeout,
+                                    poll_delay => $self->poll_delay)
+        },
+        'wait_for_stale', 'wait for stale');
 }
 
 =item wait_for($callback, [ retry_timeout => $number,] [poll_delay => $number])

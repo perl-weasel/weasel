@@ -5,7 +5,7 @@ Weasel::DriverRole - API definition for driver wrappers
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ use warnings;
 use Carp;
 use Moose::Role;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 ATTRIBUTES
 
@@ -325,6 +325,16 @@ Note: Special keys are encoded according to the WebDriver spec.
 
 sub send_keys {
     croak "Abstract interface method 'send_keys' called";
+}
+
+=item wait_for_stale
+
+Wait for the link identified by C<$link> to become stale.
+
+=cut
+
+sub wait_for_stale {
+    croak "Abstract interface method 'wait_for_stale' called";
 }
 
 =item tag_name($element_id)
