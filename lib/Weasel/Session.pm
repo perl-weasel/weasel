@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 ATTRIBUTES
@@ -374,6 +374,59 @@ sub send_keys {
             $self->driver->send_keys($element->_id, @keys);
         },
         'send_keys', 'sending keys: ' . join('', @keys // ()));
+}
+
+=item get_alert_text
+
+Checks if there is a javascript alert/confirm/input on the screen.
+Returns alert text if so.
+
+=cut
+
+sub get_alert_text {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->get_alert_text;
+        },
+        'get_alert_text');
+}
+
+=item accept_alert
+
+Accepts the currently displayed alert dialog.  Usually, this is
+equivalent to clicking the 'OK' button in the dialog.
+
+=cut
+
+sub accept_alert {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->accept_alert;
+        },
+        'accept_alert');
+}
+
+=item dismiss_alert
+
+Dismisses the currently displayed alert dialog. For comfirm()
+and prompt() dialogs, this is equivalent to clicking the
+'Cancel' button. For alert() dialogs, this is equivalent to
+clicking the 'OK' button.
+
+=cut
+
+sub dismiss_alert {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->dismiss_alert;
+        },
+        'dismiss_alert');
 }
 
 =item tag_name($element)
