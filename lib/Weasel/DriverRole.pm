@@ -5,7 +5,7 @@ Weasel::DriverRole - API definition for driver wrappers
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ use warnings;
 use Carp;
 use Moose::Role;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 ATTRIBUTES
 
@@ -53,6 +53,19 @@ has 'started' => (is => 'rw',
                   isa => 'Bool',
                   default => 0);
 
+=item user_error_handler
+
+Holds the reference to the user callable error handler.
+
+=cut
+
+has 'user_error_handler' => (
+    is => 'rw',
+    required => 0,
+    isa => 'CodeRef',
+    clearer => 'clearer_user_error_handler',
+    predicate => 'has_user_error_handler'
+);
 =back
 
 =head1 METHODS
@@ -326,6 +339,40 @@ The name of the HTML tag identified by C<$element_id>.
 
 sub tag_name {
     croak "Abstract interface method 'tag_name' called";
+}
+
+=item get_alert_text
+
+Checks if there is a javascript alert/confirm/input on the screen.
+
+=cut
+
+sub get_alert_text {
+    croak "Abstract interface method 'alert_is_present' called";
+}
+
+=item accept_alert
+
+Accepts the currently displayed alert dialog.  Usually, this is
+equivalent to clicking the 'OK' button in the dialog.
+
+=cut
+
+sub accept_alert {
+    croak "Abstract interface method 'accept_alert' called";
+}
+
+=item dismiss_alert
+
+Dismisses the currently displayed alert dialog. For comfirm()
+and prompt() dialogs, this is equivalent to clicking the
+'Cancel' button. For alert() dialogs, this is equivalent to
+clicking the 'OK' button.
+
+=cut
+
+sub dismiss_alert {
+    croak "Abstract interface method 'dismiss_alert' called";
 }
 
 =back

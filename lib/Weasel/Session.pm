@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 ATTRIBUTES
@@ -266,6 +266,7 @@ sub get {
     my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
              ? $ENV{$1} // "http://localhost:5000"
              : $self->base_url;
+
     $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
     # which might indicate empty 'base_url' where one is assumed to be set
@@ -374,6 +375,59 @@ sub send_keys {
             $self->driver->send_keys($element->_id, @keys);
         },
         'send_keys', 'sending keys: ' . join('', @keys // ()));
+}
+
+=item alert_is_present
+
+Checks if there is a javascript alert/confirm/input on the screen.
+Returns alert text if so.
+
+=cut
+
+sub alert_is_present {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->alert_is_present;
+        },
+        'alert_is_present');
+}
+
+=item accept_alert
+
+Accepts the currently displayed alert dialog.  Usually, this is
+equivalent to clicking the 'OK' button in the dialog.
+
+=cut
+
+sub accept_alert {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->accept_alert;
+        },
+        'accept_alert');
+}
+
+=item dismiss_alert
+
+Dismisses the currently displayed alert dialog. For comfirm()
+and prompt() dialogs, this is equivalent to clicking the
+'Cancel' button. For alert() dialogs, this is equivalent to
+clicking the 'OK' button.
+
+=cut
+
+sub dismiss_alert {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->dismiss_alert;
+        },
+        'dismiss_alert');
 }
 
 =item tag_name($element)
