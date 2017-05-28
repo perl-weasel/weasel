@@ -1,3 +1,6 @@
+** 0.11 / 2017-04-21
+   - Fix expansion of *text HTML expander when only one of 'id' or 'name' given
+
 ** 0.10 / 2016-09-09
    - Repair <5.14 compatibility
    - Add new 'get_page_source' api to the driver

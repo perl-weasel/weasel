@@ -5,7 +5,7 @@ Weasel::FindExpanders::HTML -
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 SYNOPSIS
 
@@ -239,7 +239,7 @@ sub text_expander {
     my @clauses;
     for my $clause (qw/ id name /) {
         push @clauses, "\@$clause='$args{$clause}'"
-            if defined $clause;
+            if defined $args{$clause};
     }
     my $clause = (@clauses) ? join ' and ', ('', @clauses) : '';
     return ".//input[(not(\@type) or \@type='text') $clause]";

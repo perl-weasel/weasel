@@ -5,7 +5,7 @@ Weasel - Perl's php/Mink-inspired abstracted web-driver framework
 
 =head1 VERSION
 
-0.11
+0.14
 
 =head1 SYNOPSIS
 
@@ -110,7 +110,7 @@ use warnings;
 
 use Moose;
 
-our $VERSION = '0.10';
+our $VERSION = '0.14';
 
 # From https://w3c.github.io/webdriver/webdriver-spec.html#keyboard-actions
 my %key_codes = (
