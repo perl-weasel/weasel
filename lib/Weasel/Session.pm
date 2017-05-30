@@ -308,6 +308,20 @@ sub get_text {
         'get_text', 'element text');
 }
 
+=item find_element_by_tag_name
+
+=cut
+
+sub find_element_by_tag_name {
+    my ($self, $name) = @_;
+
+    return $self->_logged(
+        sub {
+            return $self->driver->find_element_by_tag_name($name);
+        },
+        'find_element_by_tag_name', 'element WebElement');
+}
+
 =item is_displayed($element)
 
 Returns a boolean value indicating if the element identified by
