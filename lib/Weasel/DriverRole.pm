@@ -348,7 +348,7 @@ Checks if there is a javascript alert/confirm/input on the screen.
 =cut
 
 sub get_alert_text {
-    croak "Abstract interface method 'alert_is_present' called";
+    croak "Abstract interface method 'get_alert_text' called";
 }
 
 =item accept_alert

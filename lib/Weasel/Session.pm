@@ -391,21 +391,21 @@ sub send_keys {
         'send_keys', 'sending keys: ' . join('', @keys // ()));
 }
 
-=item alert_is_present
+=item get_alert_text
 
 Checks if there is a javascript alert/confirm/input on the screen.
 Returns alert text if so.
 
 =cut
 
-sub alert_is_present {
+sub get_alert_text {
     my ($self) = @_;
 
     $self->_logged(
         sub {
-            $self->driver->alert_is_present;
+            $self->driver->get_alert_text;
         },
-        'alert_is_present');
+        'get_alert_text');
 }
 
 =item accept_alert
