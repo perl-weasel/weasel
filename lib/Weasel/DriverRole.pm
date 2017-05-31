@@ -5,7 +5,7 @@ Weasel::DriverRole - API definition for driver wrappers
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ use warnings;
 use Carp;
 use Moose::Role;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 ATTRIBUTES
 
@@ -155,6 +155,86 @@ is implemented on the C<Weasel::Session> level.
 
 sub find_all {
     croak "Abstract inteface method 'find_all' called";
+}
+
+=item find_element_by_class
+
+=cut
+
+sub find_element_by_class {
+    croak "Abstract inteface method 'find_element_by_class' called";
+}
+
+=item find_element_by_class_name
+
+=cut
+
+sub find_element_by_class_name {
+    croak "Abstract inteface method 'find_element_by_class_name' called";
+}
+
+=item find_element_by_css
+
+=cut
+
+sub find_element_by_css {
+    croak "Abstract inteface method 'find_element_by_css' called";
+}
+
+=item find_element_by_id
+
+=cut
+
+sub find_element_by_id {
+    croak "Abstract inteface method 'find_element_by_id' called";
+}
+
+=item find_element_by_link
+
+=cut
+
+sub find_element_by_link {
+    croak "Abstract inteface method 'find_element_by_link' called";
+}
+
+=item find_element_by_link_text
+
+=cut
+
+sub find_element_by_link_text {
+    croak "Abstract inteface method 'find_element_by_link_text' called";
+}
+
+=item find_element_by_name
+
+=cut
+
+sub find_element_by_name {
+    croak "Abstract inteface method 'find_element_by_name' called";
+}
+
+=item find_element_by_partial_link_text
+
+=cut
+
+sub find_element_by_partial_link_text {
+    croak "Abstract inteface method 'find_element_by_partial_link_text' called";
+}
+
+=item find_element_by_tag_name
+
+=cut
+
+sub find_element_by_tag_name {
+    croak "Abstract inteface method 'find_element_by_tag_name' called";
+}
+
+=item find_element_by_xpath
+
+=cut
+
+sub find_element_by_xpath {
+    croak "Abstract inteface method 'find_element_by_xpath' called";
 }
 
 =item get( $url )

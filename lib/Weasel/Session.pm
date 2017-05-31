@@ -308,19 +308,176 @@ sub get_text {
         'get_text', 'element text');
 }
 
+=item find_element_by_class
+
+=cut
+
+sub find_element_by_class {
+    my ($self, $class) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_class($class)
+                );
+        },
+        'find_element_by_class', "find_element_by_class '$class'");
+}
+
+=item find_element_by_class_name
+
+=cut
+
+sub find_element_by_class_name {
+    my ($self, $class_name) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_class_name($class_name)
+                );
+        },
+        'find_element_by_class_name', "find_element_by_class_name '$class_name'");
+}
+
+=item find_element_by_css
+
+=cut
+
+sub find_element_by_css {
+    my ($self, $css) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_css($css)
+                );
+        },
+        'find_element_by_css', "find_element_by_css '$css'");
+}
+
+=item find_element_by_id
+
+=cut
+
+sub find_element_by_id {
+    my ($self, $id) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_id($id)
+                );
+        },
+        'find_element_by_id', "find_element_by_id '$id'");
+}
+
+=item find_element_by_link
+
+=cut
+
+sub find_element_by_link {
+    my ($self, $link) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_link($link)
+                );
+        },
+        'find_element_by_link', "find_element_by_link '$link'");
+}
+
+=item find_element_by_link_text
+
+=cut
+
+sub find_element_by_link_text {
+    my ($self, $link_text) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_link_text($link_text)
+                );
+        },
+        'find_element_by_link_text', "find_element_by_link_text '$link_text'");
+}
+
+=item find_element_by_name
+
+=cut
+
+sub find_element_by_name {
+    my ($self, $name) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_name($name)
+                );
+        },
+        'find_element_by_name', "find_element_by_name '$name'");
+}
+
+=item find_element_by_partial_link_text
+
+=cut
+
+sub find_element_by_partial_link_text {
+    my ($self, $partial_link_text) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_partial_link_text($partial_link_text)
+                );
+        },
+        'find_element_by_partial_link_text', "find_element_by_partial_link_text '$partial_link_text'");
+}
+
 =item find_element_by_tag_name
 
 =cut
 
 sub find_element_by_tag_name {
-    my ($self, $name) = @_;
+    my ($self, $tag_name) = @_;
 
     return $self->_logged(
         sub {
-            return $self->driver->find_element_by_tag_name($name);
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_tag_name($tag_name)
+                );
         },
-        'find_element_by_tag_name', 'element WebElement');
+        'find_element_by_tag_name', "find_element_by_tag_name '$tag_name'");
 }
+
+=item find_element_by_xpath
+
+=cut
+
+sub find_element_by_xpath {
+    my ($self, $xpath) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_xpath($xpath)
+                );
+        },
+        'find_element_by_xpath', "find_element_by_xpath '$xpath'");
+}
+
 
 =item is_displayed($element)
 
