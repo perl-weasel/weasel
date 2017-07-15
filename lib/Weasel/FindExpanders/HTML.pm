@@ -217,7 +217,7 @@ sub select_expander {
     my @clauses;
     for my $clause (qw/ id name /) {
         push @clauses, "\@$clause='$args{$clause}'"
-            if defined $clause;
+            if defined $args{$clause};
     }
     my $clause = join ' and ', @clauses;
     return ".//select[$clause]";
