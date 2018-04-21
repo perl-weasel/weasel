@@ -1,3 +1,6 @@
+** 0.14 / 2018-03-21
+   - Add get_property for W3C / Selenium3 compatibility
+
 ** 0.12 / 2016-10-03
    - Make 'get_page_source' write into a file
 

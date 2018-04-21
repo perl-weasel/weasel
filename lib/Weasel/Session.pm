@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.03
+0.04
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 ATTRIBUTES
@@ -289,6 +289,22 @@ sub get_attribute {
         sub {
             return $self->driver->get_attribute($element->_id, $attribute);
         }, 'get_attribute', "element attribute '$attribute'");
+}
+
+=item get_property($element, $property)
+
+Returns the value of the property named by C<$property> of the element
+identified by C<$element>, or C<undef> if the property isn't defined.
+
+=cut
+
+sub get_property {
+    my ($self, $element, $property) = @_;
+
+    return $self->_logged(
+        sub {
+            return $self->driver->get_property($element->_id, $property);
+        }, 'get_property', "element property '$property'");
 }
 
 =item get_text($element)

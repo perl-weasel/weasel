@@ -5,7 +5,7 @@ Weasel::Element - The base HTML/Widget element class
 
 =head1 VERSION
 
-0.01
+0.02
 
 =head1 SYNOPSIS
 
@@ -112,6 +112,24 @@ sub get_attribute {
     my ($self, $attribute) = @_;
 
     return $self->session->get_attribute($self, $attribute);
+}
+
+=item get_property($property)
+
+Returns the value of the element's property named in C<$property> or
+C<undef> if none exists.
+
+Note: Some browsers apply default values to propertys which are not
+  part of the original page.  As such, there's no direct relation between
+  the existence of propertys in the original page and this function
+  returning C<undef>.
+
+=cut
+
+sub get_property {
+    my ($self, $property) = @_;
+
+    return $self->session->get_property($self, $property);
 }
 
 =item get_text()
