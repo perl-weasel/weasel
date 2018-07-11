@@ -1,7 +1,7 @@
 
 =head1 NAME
 
-Weasel::Element::Document -
+Weasel::Element::Document - Weasel Element Document 
 
 =head1 VERSION
 
