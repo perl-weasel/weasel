@@ -5,7 +5,7 @@ Weasel::DriverRole - API definition for driver wrappers
 
 =head1 VERSION
 
-0.02
+0.04
 
 =head1 SYNOPSIS
 
@@ -33,7 +33,7 @@ use warnings;
 use Carp;
 use Moose::Role;
 
-our $VERSION = '0.02';
+our $VERSION = '0.04';
 
 =head1 ATTRIBUTES
 
@@ -53,6 +53,19 @@ has 'started' => (is => 'rw',
                   isa => 'Bool',
                   default => 0);
 
+=item user_error_handler
+
+Holds the reference to the user callable error handler.
+
+=cut
+
+has 'user_error_handler' => (
+    is => 'rw',
+    required => 0,
+    isa => 'CodeRef',
+    clearer => 'clearer_user_error_handler',
+    predicate => 'has_user_error_handler'
+);
 =back
 
 =head1 METHODS
@@ -142,6 +155,86 @@ is implemented on the C<Weasel::Session> level.
 
 sub find_all {
     croak "Abstract inteface method 'find_all' called";
+}
+
+=item find_element_by_class
+
+=cut
+
+sub find_element_by_class {
+    croak "Abstract inteface method 'find_element_by_class' called";
+}
+
+=item find_element_by_class_name
+
+=cut
+
+sub find_element_by_class_name {
+    croak "Abstract inteface method 'find_element_by_class_name' called";
+}
+
+=item find_element_by_css
+
+=cut
+
+sub find_element_by_css {
+    croak "Abstract inteface method 'find_element_by_css' called";
+}
+
+=item find_element_by_id
+
+=cut
+
+sub find_element_by_id {
+    croak "Abstract inteface method 'find_element_by_id' called";
+}
+
+=item find_element_by_link
+
+=cut
+
+sub find_element_by_link {
+    croak "Abstract inteface method 'find_element_by_link' called";
+}
+
+=item find_element_by_link_text
+
+=cut
+
+sub find_element_by_link_text {
+    croak "Abstract inteface method 'find_element_by_link_text' called";
+}
+
+=item find_element_by_name
+
+=cut
+
+sub find_element_by_name {
+    croak "Abstract inteface method 'find_element_by_name' called";
+}
+
+=item find_element_by_partial_link_text
+
+=cut
+
+sub find_element_by_partial_link_text {
+    croak "Abstract inteface method 'find_element_by_partial_link_text' called";
+}
+
+=item find_element_by_tag_name
+
+=cut
+
+sub find_element_by_tag_name {
+    croak "Abstract inteface method 'find_element_by_tag_name' called";
+}
+
+=item find_element_by_xpath
+
+=cut
+
+sub find_element_by_xpath {
+    croak "Abstract inteface method 'find_element_by_xpath' called";
 }
 
 =item get( $url )
@@ -326,6 +419,40 @@ The name of the HTML tag identified by C<$element_id>.
 
 sub tag_name {
     croak "Abstract interface method 'tag_name' called";
+}
+
+=item get_alert_text
+
+Checks if there is a javascript alert/confirm/input on the screen.
+
+=cut
+
+sub get_alert_text {
+    croak "Abstract interface method 'get_alert_text' called";
+}
+
+=item accept_alert
+
+Accepts the currently displayed alert dialog.  Usually, this is
+equivalent to clicking the 'OK' button in the dialog.
+
+=cut
+
+sub accept_alert {
+    croak "Abstract interface method 'accept_alert' called";
+}
+
+=item dismiss_alert
+
+Dismisses the currently displayed alert dialog. For comfirm()
+and prompt() dialogs, this is equivalent to clicking the
+'Cancel' button. For alert() dialogs, this is equivalent to
+clicking the 'OK' button.
+
+=cut
+
+sub dismiss_alert {
+    croak "Abstract interface method 'dismiss_alert' called";
 }
 
 =back

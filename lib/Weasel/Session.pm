@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 ATTRIBUTES
@@ -266,6 +266,7 @@ sub get {
     my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
              ? $ENV{$1} // "http://localhost:5000"
              : $self->base_url;
+
     $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
     # which might indicate empty 'base_url' where one is assumed to be set
@@ -306,6 +307,177 @@ sub get_text {
         },
         'get_text', 'element text');
 }
+
+=item find_element_by_class
+
+=cut
+
+sub find_element_by_class {
+    my ($self, $class) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_class($class)
+                );
+        },
+        'find_element_by_class', "find_element_by_class '$class'");
+}
+
+=item find_element_by_class_name
+
+=cut
+
+sub find_element_by_class_name {
+    my ($self, $class_name) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_class_name($class_name)
+                );
+        },
+        'find_element_by_class_name', "find_element_by_class_name '$class_name'");
+}
+
+=item find_element_by_css
+
+=cut
+
+sub find_element_by_css {
+    my ($self, $css) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_css($css)
+                );
+        },
+        'find_element_by_css', "find_element_by_css '$css'");
+}
+
+=item find_element_by_id
+
+=cut
+
+sub find_element_by_id {
+    my ($self, $id) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_id($id)
+                );
+        },
+        'find_element_by_id', "find_element_by_id '$id'");
+}
+
+=item find_element_by_link
+
+=cut
+
+sub find_element_by_link {
+    my ($self, $link) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_link($link)
+                );
+        },
+        'find_element_by_link', "find_element_by_link '$link'");
+}
+
+=item find_element_by_link_text
+
+=cut
+
+sub find_element_by_link_text {
+    my ($self, $link_text) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_link_text($link_text)
+                );
+        },
+        'find_element_by_link_text', "find_element_by_link_text '$link_text'");
+}
+
+=item find_element_by_name
+
+=cut
+
+sub find_element_by_name {
+    my ($self, $name) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_name($name)
+                );
+        },
+        'find_element_by_name', "find_element_by_name '$name'");
+}
+
+=item find_element_by_partial_link_text
+
+=cut
+
+sub find_element_by_partial_link_text {
+    my ($self, $partial_link_text) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_partial_link_text($partial_link_text)
+                );
+        },
+        'find_element_by_partial_link_text', "find_element_by_partial_link_text '$partial_link_text'");
+}
+
+=item find_element_by_tag_name
+
+=cut
+
+sub find_element_by_tag_name {
+    my ($self, $tag_name) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_tag_name($tag_name)
+                );
+        },
+        'find_element_by_tag_name', "find_element_by_tag_name '$tag_name'");
+}
+
+=item find_element_by_xpath
+
+=cut
+
+sub find_element_by_xpath {
+    my ($self, $xpath) = @_;
+
+    return $self->_logged(
+        sub {
+            return
+                $self->_wrap_widget(
+                    $self->driver->find_element_by_xpath($xpath)
+                );
+        },
+        'find_element_by_xpath', "find_element_by_xpath '$xpath'");
+}
+
 
 =item is_displayed($element)
 
@@ -374,6 +546,59 @@ sub send_keys {
             $self->driver->send_keys($element->_id, @keys);
         },
         'send_keys', 'sending keys: ' . join('', @keys // ()));
+}
+
+=item get_alert_text
+
+Checks if there is a javascript alert/confirm/input on the screen.
+Returns alert text if so.
+
+=cut
+
+sub get_alert_text {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->get_alert_text;
+        },
+        'get_alert_text');
+}
+
+=item accept_alert
+
+Accepts the currently displayed alert dialog.  Usually, this is
+equivalent to clicking the 'OK' button in the dialog.
+
+=cut
+
+sub accept_alert {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->accept_alert;
+        },
+        'accept_alert');
+}
+
+=item dismiss_alert
+
+Dismisses the currently displayed alert dialog. For comfirm()
+and prompt() dialogs, this is equivalent to clicking the
+'Cancel' button. For alert() dialogs, this is equivalent to
+clicking the 'OK' button.
+
+=cut
+
+sub dismiss_alert {
+    my ($self) = @_;
+
+    $self->_logged(
+        sub {
+            $self->driver->dismiss_alert;
+        },
+        'dismiss_alert');
 }
 
 =item tag_name($element)
