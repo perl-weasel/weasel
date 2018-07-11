@@ -44,7 +44,7 @@ use List::Util qw(max);
 our @EXPORT_OK = qw| register_widget_handler best_match_handler_class |;
 
 =head1 FUNCTIONS
-g
+
 =over
 
 =item register_widget_handler($handler_class_name, $group_name, %conditions)

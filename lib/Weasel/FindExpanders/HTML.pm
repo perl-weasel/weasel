@@ -259,5 +259,6 @@ register_find_expander($_->{name}, 'HTML', $_->{expander})
          {  name => 'text',     expander => \&text_expander      },
     );
 
-
 1;
+=back
+
