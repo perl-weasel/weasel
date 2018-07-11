@@ -21,7 +21,7 @@ Weasel::DriverRole - API definition for driver wrappers
 This module defines the API for all Weasel drivers to be implemented.
 
 By using this role in the driver implementation module, an abstract
-method is implmented croak()ing if it's called.
+method is implemented croak()ing if it's called.
 
 =cut
 
@@ -129,7 +129,7 @@ Note: The driver should always accept an xpath locator as an id value
 
 =item find_all( $parent_id, $locator, $scheme )
 
-Returns the _id values for the elements to be instanciated, matching
+Returns the _id values for the elements to be instantiated, matching
 the C<$locator> using C<scheme>.
 
 Depending on array or scalar context, the return value is
