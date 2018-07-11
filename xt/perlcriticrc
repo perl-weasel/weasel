@@ -1,2 +1,19 @@
+severity  = 5
+theme     =
+exclude   = 'OTRS::'
+
 [Modules::ProhibitEvilModules]
 modules = Carp::Always Data::Dumper
+
+#--------------------------------------------------------------
+# I think these are really important, so always load them
+ 
+[TestingAndDebugging::RequireUseStrict]
+severity = 5
+ 
+[TestingAndDebugging::RequireUseWarnings]
+severity = 5
+ 
+#--------------------------------------------------------------
+# For all other Policies, I accept the default severity,
+# so no additional configuration is required for them.

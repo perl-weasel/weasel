@@ -173,6 +173,7 @@ my %key_codes = (
     ZENKAKU_HANKAKU => "\N{U+E040}",
     );
 
+=over
 
 =item KEYS
 
@@ -185,6 +186,8 @@ codes as the values.
 sub KEYS {
     return \%key_codes;
 }
+
+=back
 
 =head1 ATTRIBUTES
 
@@ -272,3 +275,4 @@ Licensed under the same terms as Perl.
 
 
 1;
+

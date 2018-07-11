@@ -71,5 +71,6 @@ sub value {
     return $self->session->get_attribute($self, 'value');
 }
 
+=back
 
 1;
