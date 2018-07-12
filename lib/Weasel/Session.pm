@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.02
+0.03
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 ATTRIBUTES
@@ -351,11 +351,11 @@ Writes a get_page_source of the browser's window to the filehandle C<$fh>.
 =cut
 
 sub get_page_source {
-    my ($self) = @_;
+    my ($self,$fh) = @_;
 
     $self->_logged(
         sub {
-            $self->driver->get_page_source();
+            $self->driver->get_page_source($fh);
         }, 'get_page_source', 'get_page_source');
 }
 
