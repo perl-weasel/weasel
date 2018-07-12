@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.04
+0.03
 
 =head1 SYNOPSIS
 
@@ -42,7 +42,7 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.04';
+our $VERSION = '0.03';
 
 
 =head1 ATTRIBUTES
@@ -266,7 +266,6 @@ sub get {
     my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
              ? $ENV{$1} // "http://localhost:5000"
              : $self->base_url;
-
     $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
     # which might indicate empty 'base_url' where one is assumed to be set
