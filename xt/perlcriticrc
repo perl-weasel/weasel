@@ -52,4 +52,3 @@ severity = 1
 #--------------------------------------------------------------
 # For all other Policies, I accept the default severity,
 # so no additional configuration is required for them.
-

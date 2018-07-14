@@ -15,6 +15,12 @@ Weasel::FindExpanders::HTML - Weasel FindExpanders HTML
 
 =cut
 
+=head1 DEPENDENCIES
+
+This module wraps L<Selenium::Remote::Driver>, version 2.
+
+=cut
+
 package Weasel::FindExpanders::HTML;
 
 use strict;
@@ -23,6 +29,10 @@ use warnings;
 use Weasel::FindExpanders qw/ register_find_expander /;
 
 =head1 DESCRIPTION
+
+=cut
+
+=head1 SUBROUTINES/METHODS
 
 =over
 
@@ -258,6 +268,44 @@ register_find_expander($_->{name}, 'HTML', $_->{expander})
          {  name => 'select',   expander => \&select_expander   },
          {  name => 'text',     expander => \&text_expander      },
     );
+
+=back
+
+=head1 AUTHOR
+
+Erik Huelsmann
+
+=head1 CONTRIBUTORS
+
+Erik Huelsmann
+Yves Lavoie
+
+=head1 MAINTAINERS
+
+Erik Huelsmann
+
+=head1 BUGS AND LIMITATIONS
+
+Bugs can be filed in the GitHub issue tracker for the Weasel project:
+ https://github.com/perl-weasel/weasel/issues
+
+=head1 SOURCE
+
+The source code repository for Weasel is at
+ https://github.com/perl-weasel/weasel
+
+=head1 SUPPORT
+
+Community support is available through
+L<perl-weasel@googlegroups.com|mailto:perl-weasel@googlegroups.com>.
+
+=head1 LICENSE AND COPYRIGHT
+
+ (C) 2016  Erik Huelsmann
+
+Licensed under the same terms as Perl.
+
+=cut
 
 1;
 =back
