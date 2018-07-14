@@ -208,7 +208,8 @@ no name argument is provided.
 
 has 'default_session' => (is => 'rw',
                           isa => 'Str',
-                          default => 'default');
+                          default => 'default',
+     );
 
 =item sessions
 
@@ -218,7 +219,8 @@ Holds the sessions registered with the C<Weasel> instance.
 
 has 'sessions' => (is => 'ro',
                    isa => 'HashRef[Weasel::Session]',
-                   default => sub { {} } );
+                   default => sub { {} },
+    );
 
 =back
 

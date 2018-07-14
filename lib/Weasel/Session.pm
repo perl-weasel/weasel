@@ -68,7 +68,8 @@ has 'driver' => (is => 'ro',
                      'stop' => 'stop',
                      'restart' => 'restart',
                      'started' => 'started',
-                 });
+                 },
+    );
 
 =item widget_groups
 
@@ -94,7 +95,8 @@ If it is not an environment variable, it will be used as is.
 
 has 'base_url' => (is => 'rw',
                    isa => 'Str',
-                   default => '' );
+                   default => '',
+    );
 
 =item page
 
@@ -105,7 +107,8 @@ Holds the root element of the target HTML page (the 'html' tag).
 has 'page' => (is => 'ro',
                isa => 'Weasel::Element::Document',
                builder => '_page_builder',
-               lazy => 1);
+               lazy => 1,
+    );
 
 sub _page_builder {
     my $self = shift;
@@ -123,7 +126,8 @@ Upon instantiation can be set to log consumer; a function of 3 arguments:
 =cut
 
 has 'log_hook' => (is => 'ro',
-                   isa => 'Maybe[CodeRef]');
+                   isa => 'Maybe[CodeRef]',
+    );
 
 =item page_class
 
@@ -134,7 +138,8 @@ attribute.
 
 has 'page_class' => (is => 'ro',
                      isa => 'Str',
-                     default => 'Weasel::Element::Document');
+                     default => 'Weasel::Element::Document',
+    );
 
 =item retry_timeout
 

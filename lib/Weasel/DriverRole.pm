@@ -57,7 +57,8 @@ The value managed by the C<start> and C<stop> methods.
 
 has 'started' => (is => 'rw',
                   isa => 'Bool',
-                  default => 0);
+                  default => 0,
+                 );
 
 =back
 

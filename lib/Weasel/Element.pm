@@ -46,7 +46,8 @@ belongs.  Used to access the session's driver to query element properties.x
 
 has session => (is => 'ro',
                 isa => 'Weasel::Session',
-                required => 1);
+                required => 1,
+    );
 
 =item _id
 
