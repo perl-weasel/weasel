@@ -113,5 +113,7 @@ Licensed under the same terms as Perl.
 
 =cut
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
