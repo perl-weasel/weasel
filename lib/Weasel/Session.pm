@@ -254,10 +254,10 @@ sub find_all {
         sub {
             my ($rv) = @_;
             return "found " . scalar(@$rv) . " elements for $pattern "
-                . (join(', ', %args)) . "\n"
-                . (join("\n",
+                . (join ', ', %args) . "\n"
+                . (join "\n",
                         map { ' - ' . ref($_)
-                                  . ' (' . $_->tag_name . ")" } @$rv));
+                                  . ' (' . $_->tag_name . ")" } @$rv);
         },
         "pattern: $pattern");
     return wantarray ? @rv : \@rv;
@@ -384,7 +384,7 @@ sub send_keys {
         sub {
             $self->driver->send_keys($element->_id, @keys);
         },
-        'send_keys', 'sending keys: ' . join('', @keys // ()));
+        'send_keys', 'sending keys: ' . (join '', @keys // ()));
 }
 
 =item tag_name($element)
