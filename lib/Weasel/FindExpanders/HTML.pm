@@ -1,7 +1,7 @@
 
 =head1 NAME
 
-Weasel::FindExpanders::HTML - 
+Weasel::FindExpanders::HTML - Weasel FindExpanders HTML
 
 =head1 VERSION
 
