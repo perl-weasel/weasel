@@ -38,6 +38,7 @@ use warnings;
 
 use Carp;
 use Moose::Role;
+use namespace::autoclean;
 
 our $VERSION = '0.02';
 

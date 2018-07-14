@@ -43,6 +43,7 @@ use strict;
 use warnings;
 
 use Moose;
+use namespace::autoclean;
 
 use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;

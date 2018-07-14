@@ -32,6 +32,7 @@ use strict;
 use warnings;
 
 use Moose;
+use namespace::autoclean;
 
 =head1 ATTRIBUTES
 

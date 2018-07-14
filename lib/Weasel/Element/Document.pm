@@ -28,6 +28,7 @@ use warnings;
 
 use Moose;
 extends 'Weasel::Element';
+use namespace::autoclean;
 
 =head1 ATTRIBUTES
 

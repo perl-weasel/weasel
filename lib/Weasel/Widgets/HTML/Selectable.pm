@@ -34,6 +34,7 @@ use Weasel::Widgets::HTML::Input;
 use Weasel::WidgetHandlers qw/ register_widget_handler /;
 
 extends 'Weasel::Widgets::HTML::Input';
+use namespace::autoclean;
 
 register_widget_handler(
     __PACKAGE__, 'HTML',

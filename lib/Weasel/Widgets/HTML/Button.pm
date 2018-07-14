@@ -33,6 +33,7 @@ use Moose;
 use Weasel::WidgetHandlers qw/ register_widget_handler /;
 
 extends 'Weasel::Widgets::HTML::Input';
+use namespace::autoclean;
 
 =head1 SUBROUTINES/METHODS
 

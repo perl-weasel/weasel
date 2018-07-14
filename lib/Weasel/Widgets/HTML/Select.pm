@@ -29,7 +29,7 @@ use Moose;
 use Weasel::Element;
 use Weasel::WidgetHandlers qw/ register_widget_handler /;
 extends 'Weasel::Element';
-
+use namespace::autoclean;
 
 register_widget_handler(
     __PACKAGE__, 'HTML',
