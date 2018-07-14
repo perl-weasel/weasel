@@ -122,8 +122,8 @@ sub best_match_handler_class {
     for my $group (@$groups) {
         my $handlers = $widget_handlers{$group};
 
-      handler:
-        for my $handler (@$handlers) {
+      HANDLER:
+        for my $HANDLER (@$handlers) {
             my $conditions = $handler->{conditions};
 
             next unless $tag eq $conditions->{tag_name};
@@ -137,14 +137,14 @@ sub best_match_handler_class {
                        unless defined $elem_classes;
 
                 for my $class (@{$conditions->{classes}}) {
-                    next handler
+                    next HANDLER
                         unless exists $elem_classes->{$class};
                     $match_count++;
                 }
             }
 
             for my $att (keys %{$conditions->{attributes}}) {
-                next handler
+                next HANDLER
                     unless _att_eq(
                         $conditions->{attributes}->{$att},
                         _cached_elem_att(
