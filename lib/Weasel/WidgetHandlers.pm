@@ -77,7 +77,7 @@ sub register_widget_handler {
     # make sure we can use the module by pre-loading it
     use_module $class;
 
-    push @{$widget_handlers{$group}}, {
+    return push @{$widget_handlers{$group}}, {
         class => $class,
         conditions => \%conditions,
     };

@@ -183,7 +183,7 @@ textarea elements and input elements of type text and password.
 sub clear {
     my ($self, $element) = @_;
 
-    $self->_logged(sub { $self->driver->clear($element->_id); },
+    return $self->_logged(sub { $self->driver->clear($element->_id); },
                    'clear', 'clearing input element');
 }
 
@@ -198,7 +198,7 @@ current mouse location.
 sub click {
     my ($self, $element) = @_;
 
-    $self->_logged(
+    return $self->_logged(
         sub {
             $self->driver->click(($element) ? $element->_id : undef);
         },
@@ -281,7 +281,7 @@ sub get {
     $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
     # which might indicate empty 'base_url' where one is assumed to be set
-    $self->_logged(
+    return $self->_logged(
         sub {
             return $self->driver->get($url);
         }, 'get', "loading URL: $url");
@@ -350,7 +350,7 @@ Note: this version assumes pictures of type PNG will be written;
 sub screenshot {
     my ($self, $fh) = @_;
 
-    $self->_logged(
+    return $self->_logged(
         sub {
             $self->driver->screenshot($fh);
         }, 'screenshot', 'screenshot');
@@ -365,7 +365,7 @@ Writes a get_page_source of the browser's window to the filehandle C<$fh>.
 sub get_page_source {
     my ($self,$fh) = @_;
 
-    $self->_logged(
+    return $self->_logged(
         sub {
             $self->driver->get_page_source($fh);
         }, 'get_page_source', 'get_page_source');
@@ -381,7 +381,7 @@ simulating keyboard input.
 sub send_keys {
     my ($self, $element, @keys) = @_;
 
-    $self->_logged(
+    return $self->_logged(
         sub {
             $self->driver->send_keys($element->_id, @keys);
         },
@@ -416,7 +416,7 @@ session-global settings.
 sub wait_for {
     my ($self, $callback, %args) = @_;
 
-    $self->_logged(
+    return $self->_logged(
         sub {
             $self->driver->wait_for($callback,
                                     retry_timeout => $self->retry_timeout,

@@ -167,7 +167,7 @@ Scrolls the element into the viewport and simulates it being clicked on.
 
 sub click {
     my ($self) = @_;
-    $self->session->click($self);
+    return $self->session->click($self);
 }
 
 =item send_keys(@keys)
@@ -182,7 +182,7 @@ number of strings containing unicode characters to be sent.  E.g.
 sub send_keys {
     my ($self, @keys) = @_;
 
-    $self->session->send_keys($self, @keys);
+    return $self->session->send_keys($self, @keys);
 }
 
 =item tag_name()

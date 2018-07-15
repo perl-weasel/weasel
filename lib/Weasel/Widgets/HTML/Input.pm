@@ -58,7 +58,7 @@ register_widget_handler(
 sub clear {
     my ($self) = @_;
 
-    $self->session->clear($self);
+    return $self->session->clear($self);
 }
 
 =item value([$value])

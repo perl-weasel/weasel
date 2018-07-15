@@ -91,7 +91,7 @@ driver methods as per the Web driver methods section below.
 
 =cut
 
-sub start { my $self = shift; $self->started(1); }
+sub start { my $self = shift; return $self->started(1); }
 
 =item stop
 
@@ -101,7 +101,7 @@ in a restartable state.
 
 =cut
 
-sub stop { my $self = shift; $self->started(0); }
+sub stop { my $self = shift; return $self->started(0); }
 
 =item restart
 
@@ -110,7 +110,7 @@ This function stops (if started) and starts the driver.
 
 =cut
 
-sub restart { my $self = shift; $self->stop; $self->start; }
+sub restart { my $self = shift; $self->stop; return $self->start; }
 
 =back
 

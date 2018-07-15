@@ -65,7 +65,7 @@ my %find_expanders;
 sub register_find_expander {
     my ($pattern_name, $group, $expander_function) = @_;
 
-    push @{$find_expanders{$group}{$pattern_name}}, $expander_function;
+    return push @{$find_expanders{$group}{$pattern_name}}, $expander_function;
 }
 
 =item expand_finder_pattern($pattern, $args, $groups)

@@ -71,7 +71,7 @@ sub find_option {
 sub select_option {
     my ($self, $text) = @_;
 
-    $self->find_option($text)->click;
+    return $self->find_option($text)->click;
 }
 
 
