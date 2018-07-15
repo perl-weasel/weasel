@@ -37,6 +37,7 @@ modules = Carp::Always Data::Dumper Data::Printer
 
 [Subroutines::RequireArgUnpacking]
 
+[-ValuesAndExpressions::ProhibitEmptyQuotes]
 [Variables::ProhibitPunctuationVars]
 string_mode = thorough
 
