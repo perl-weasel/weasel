@@ -94,11 +94,11 @@ sub expand_finder_pattern {
 
     my @matches;
 
-    for my $group (@$groups) {
+    for my $group (@{$groups}) {
         next if ! exists $find_expanders{$group}{$name};
 
         push @matches,
-          reverse map { $_->(%$args) } @{$find_expanders{$group}{$name}};
+          reverse map { $_->(%{$args}) } @{$find_expanders{$group}{$name}};
     }
 
     croak "No expansions matching '$pattern'"

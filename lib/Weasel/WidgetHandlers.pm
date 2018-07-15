@@ -119,11 +119,11 @@ sub best_match_handler_class {
     my $elem_classes;
 
     my $tag = $driver->tag_name($_id);
-    for my $group (@$groups) {
+    for my $group (@{$groups}) {
         my $handlers = $widget_handlers{$group};
 
       HANDLER:
-        for my $HANDLER (@$handlers) {
+        for my $HANDLER (@{$handlers}) {
             my $conditions = $handler->{conditions};
 
             next unless $tag eq $conditions->{tag_name};

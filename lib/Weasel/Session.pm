@@ -254,11 +254,11 @@ sub find_all {
         'find_all',
         sub {
             my ($rv) = @_;
-            return "found " . scalar(@$rv) . " elements for $pattern "
+            return "found " . scalar(@{$rv}) . " elements for $pattern "
                 . (join ', ', %args) . "\n"
                 . (join "\n",
                         map { ' - ' . ref($_)
-                                  . ' (' . $_->tag_name . ")" } @$rv);
+                                  . ' (' . $_->tag_name . ")" } @{$rv});
         },
         "pattern: $pattern");
     return wantarray ? @rv : \@rv;
