@@ -254,11 +254,11 @@ sub find_all {
         'find_all',
         sub {
             my ($rv) = @_;
-            return "found " . scalar(@{$rv}) . " elements for $pattern "
-                . (join ', ', %args) . "\n"
-                . (join "\n",
+            return 'found ' . scalar(@{$rv}) . " elements for $pattern "
+                . (join ', ', %args) . '\n'
+                . (join '\n',
                         map { ' - ' . ref($_)
-                                  . ' (' . $_->tag_name . ")" } @{$rv});
+                                  . ' (' . $_->tag_name . ')' } @{$rv});
         },
         "pattern: $pattern");
     return wantarray ? @rv : \@rv;
@@ -276,7 +276,7 @@ sub get {
     my ($self, $url) = @_;
 
     my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
-             ? $ENV{$1} // "http://localhost:5000"
+             ? $ENV{$1} // 'http://localhost:5000'
              : $self->base_url;
     $url = $base . $url;
     ###TODO add logging warning of urls without protocol part
@@ -431,8 +431,8 @@ before 'BUILDARGS', sub {
     my ($class, @args) = @_;
     my $args = (ref $args[0]) ? $args[0] : { @args };
 
-    confess "Driver used to construct session object uses old API version;
-some functionality may not work correctly"
+    confess q{Driver used to construct session object uses old API version;
+some functionality may not work correctly}
         if ($args->{driver}
             && $args->{driver}->implements < $Weasel::DriverRole::VERSION);
 };

@@ -149,7 +149,7 @@ is implemented on the C<Weasel::Session> level.
 =cut
 
 sub find_all {
-    croak "Abstract inteface method 'find_all' called";
+    croak q{Abstract inteface method 'find_all' called};
 }
 
 =item get( $url )
@@ -162,7 +162,7 @@ a registered prefix.
 =cut
 
 sub get {
-    croak "Abstract interface method 'get' called";
+    croak q{Abstract interface method 'get' called};
 }
 
 =item is_displayed($element_id)
@@ -173,7 +173,7 @@ C<$element_id> is interactable (can be selected, clicked on, etc)
 =cut
 
 sub is_displayed {
-    croak "Abstract interface method 'is_displayed' called";
+    croak q{Abstract interface method 'is_displayed' called};
 }
 
 =item wait_for( $callback, retry_timeout => $num, poll_delay => $num )
@@ -193,7 +193,7 @@ Note: The user should catch inside the callback any exceptions that are
 =cut
 
 sub wait_for {
-    croak "Abstract interface method 'wait_for' called";
+    croak q{Abstract interface method 'wait_for' called};
 }
 
 
@@ -205,7 +205,7 @@ mouse location otherwise.
 =cut
 
 sub clear {
-    croak "Abstract interface method 'clear' called";
+    croak q{Abstract interface method 'clear' called};
 }
 
 =item click( [ $element_id ] )
@@ -216,7 +216,7 @@ mouse location otherwise.
 =cut
 
 sub click {
-    croak "Abstract interface method 'click' called";
+    croak q{Abstract interface method 'click' called};
 }
 
 =item dblclick()
@@ -226,7 +226,7 @@ Double clicks on the current mouse location.
 =cut
 
 sub dblclick {
-     croak "Abstract interface method 'dblclick' called";
+     croak q{Abstract interface method 'dblclick' called};
 }
 
 =item get_attribute($element_id, $attribute_name)
@@ -237,7 +237,7 @@ of the element indicated by C<$element_id>.
 =cut
 
 sub get_attribute {
-    croak "Abstract interface method 'get_attribute' called";
+    croak q{Abstract interface method 'get_attribute' called};
 }
 
 =item get_page_source($fh)
@@ -247,7 +247,7 @@ Writes a get_page_source of the browser's window to the filehandle C<$fh>.
 =cut
 
 sub get_page_source {
-    croak "Abstract interface method 'get_page_source' called";
+    croak q{Abstract interface method 'get_page_source' called};
 }
 
 =item get_text($element_id)
@@ -258,7 +258,7 @@ the so-called 'innerHTML'.
 =cut
 
 sub get_text {
-    croak "Abstract interface method 'get_text' called";
+    croak q{Abstract interface method 'get_text' called};
 }
 
 =item set_attribute($element_id, $attribute_name, $value)
@@ -269,7 +269,7 @@ for the element identified by C<$element_id>.
 =cut
 
 sub set_attribute {
-    croak "Abstract interface method 'set_attribute' called";
+    croak q{Abstract interface method 'set_attribute' called};
 }
 
 =item get_selected($element_id)
@@ -277,7 +277,7 @@ sub set_attribute {
 =cut
 
 sub get_selected {
-    croak "Abstract interface method 'get_selected' called";
+    croak q{Abstract interface method 'get_selected' called};
 }
 
 =item set_selected($element_id, $value)
@@ -285,7 +285,7 @@ sub get_selected {
 =cut
 
 sub set_selected {
-    croak "Abstract interface method 'set_selected' called";
+    croak q{Abstract interface method 'set_selected' called};
 }
 
 =item screenshot($fh)
@@ -299,7 +299,7 @@ Note: In the current version of the driver, it's assumed the
 =cut
 
 sub screenshot {
-    croak "Abstract interface method 'screenshot' called";
+    croak q{Abstract interface method 'screenshot' called};
 }
 
 =item send_keys($element_id, @keys)
@@ -323,7 +323,7 @@ Note: Special keys are encoded according to the WebDriver spec.
 =cut
 
 sub send_keys {
-    croak "Abstract interface method 'send_keys' called";
+    croak q{Abstract interface method 'send_keys' called};
 }
 
 =item tag_name($element_id)
@@ -333,7 +333,7 @@ The name of the HTML tag identified by C<$element_id>.
 =cut
 
 sub tag_name {
-    croak "Abstract interface method 'tag_name' called";
+    croak q{Abstract interface method 'tag_name' called};
 }
 
 =back
