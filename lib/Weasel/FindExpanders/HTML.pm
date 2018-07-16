@@ -70,9 +70,9 @@ sub button_expander {
         (@input_clauses) ? join ' and ', ('', @input_clauses) : '';
     my $btn_clause =
         (@input_clauses) ? join ' and ', @btn_clauses : '';
-    return ".//input[(\@type='submit' or \@type='reset'
-                      or \@type='image' or \@type='button') $input_clause]
-            | .//button[$btn_clause]";
+    return ".//input[(\@type='submit' or \@type='reset'" .
+                     "or \@type='image' or \@type='button') $input_clause]" .
+            "| .//button[$btn_clause]";
 }
 
 =item checkbox_expander
