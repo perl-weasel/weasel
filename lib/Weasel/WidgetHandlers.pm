@@ -123,7 +123,7 @@ sub best_match_handler_class {
         my $handlers = $widget_handlers{$group};
 
       HANDLER:
-        for my $HANDLER (@{$handlers}) {
+        for my $handler (@{$handlers}) {
             my $conditions = $handler->{conditions};
 
             next unless $tag eq $conditions->{tag_name};
