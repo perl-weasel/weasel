@@ -107,11 +107,11 @@ Holds the root element of the target HTML page (the 'html' tag).
 
 has 'page' => (is => 'ro',
                isa => 'Weasel::Element::Document',
-               builder => '_page_builder',
+               builder => '_build_page',
                lazy => 1,
     );
 
-sub _page_builder {
+sub _build_page {
     my $self = shift;
     my $class = use_module($self->page_class);
 
