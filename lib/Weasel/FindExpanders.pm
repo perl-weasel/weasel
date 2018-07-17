@@ -82,9 +82,11 @@ is returned as the only list/arrayref element.
 sub expand_finder_pattern {
     my ($pattern, $args, $groups) = @_;
 
+    ##no critic(ProhibitCaptureWithoutTest)
     return $pattern
         if ! ($pattern =~ m/^\*([^\|]+)/);
     my $name = $1;
+    ##critic(ProhibitCaptureWithoutTest)
 
     croak "No expansions registered (while expanding '$pattern')"
         if scalar(keys %find_expanders) == 0;
