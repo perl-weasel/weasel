@@ -70,6 +70,7 @@ sub button_expander {
         (@input_clauses) ? join ' and ', ('', @input_clauses) : '';
     my $btn_clause =
         (@input_clauses) ? join ' and ', @btn_clauses : '';
+    ##no critic(ProhibitInterpolationOfLiterals)
     return ".//input[(\@type='submit' or \@type='reset'" .
                      "or \@type='image' or \@type='button') $input_clause]" .
             "| .//button[$btn_clause]";
@@ -124,7 +125,7 @@ Criteria:
 sub labeled_expander {
     my %args = @_;
 
-    my $tag = $args{tag_name} // '*';
+    my $tag = $args{tag_name} // q{*};
     my $text = $args{text};
     return ".//${tag}[\@id=//label[text()='$text']/\@for]";
 }
