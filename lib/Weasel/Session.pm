@@ -254,6 +254,7 @@ sub find_all {
         'find_all',
         sub {
             my ($rv) = @_;
+            ##no critic(ProhibitUselessTopic)
             return 'found ' . scalar(@{$rv}) . " elements for $pattern "
                 . (join ', ', %args) . "\n"
                 . (join "\n",
