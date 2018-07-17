@@ -276,7 +276,7 @@ after prefixing with C<base_url>.
 sub get {
     my ($self, $url) = @_;
 
-    my $base = $self->base_url =~ /\$\{([a-zA-Z0-9_]+)\}/
+    my $base = $self->base_url =~ /\$\{(\w+)\}/
              ? $ENV{$1} // 'http://localhost:5000'
              : $self->base_url;
     $url = $base . $url;
