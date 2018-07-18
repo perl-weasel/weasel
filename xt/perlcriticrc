@@ -30,6 +30,8 @@ lib_sections = NAME | VERSION | SYNOPSIS | DESCRIPTION | DEPENDENCIES | SUBROUTI
 [Modules::ProhibitEvilModules]
 modules = Carp::Always Data::Dumper Data::Printer
 
+[-Modules::RequireVersionVar]
+
 [-RegularExpressions::ProhibitEscapedMetacharacters]
 [-RegularExpressions::RequireBracesForMultiline]
 [-RegularExpressions::RequireDotMatchAnything]
