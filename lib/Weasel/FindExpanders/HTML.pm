@@ -15,6 +15,12 @@ Weasel::FindExpanders::HTML - Weasel FindExpanders HTML
 
 =cut
 
+=head1 DEPENDENCIES
+
+This module wraps L<Selenium::Remote::Driver>, version 2.
+
+=cut
+
 package Weasel::FindExpanders::HTML;
 
 use strict;
@@ -23,6 +29,10 @@ use warnings;
 use Weasel::FindExpanders qw/ register_find_expander /;
 
 =head1 DESCRIPTION
+
+=cut
+
+=head1 SUBROUTINES/METHODS
 
 =over
 
@@ -60,9 +70,10 @@ sub button_expander {
         (@input_clauses) ? join ' and ', ('', @input_clauses) : '';
     my $btn_clause =
         (@input_clauses) ? join ' and ', @btn_clauses : '';
-    return ".//input[(\@type='submit' or \@type='reset'
-                      or \@type='image' or \@type='button') $input_clause]
-            | .//button[$btn_clause]";
+    ##no critic(ProhibitInterpolationOfLiterals)
+    return ".//input[(\@type='submit' or \@type='reset'" .
+                     "or \@type='image' or \@type='button') $input_clause]" .
+            "| .//button[$btn_clause]";
 }
 
 =item checkbox_expander
@@ -114,7 +125,7 @@ Criteria:
 sub labeled_expander {
     my %args = @_;
 
-    my $tag = $args{tag_name} // '*';
+    my $tag = $args{tag_name} // q{*};
     my $text = $args{text};
     return ".//${tag}[\@id=//label[text()='$text']/\@for]";
 }
@@ -259,6 +270,42 @@ register_find_expander($_->{name}, 'HTML', $_->{expander})
          {  name => 'text',     expander => \&text_expander      },
     );
 
-1;
 =back
 
+=head1 AUTHOR
+
+Erik Huelsmann
+
+=head1 CONTRIBUTORS
+
+Erik Huelsmann
+Yves Lavoie
+
+=head1 MAINTAINERS
+
+Erik Huelsmann
+
+=head1 BUGS AND LIMITATIONS
+
+Bugs can be filed in the GitHub issue tracker for the Weasel project:
+ https://github.com/perl-weasel/weasel/issues
+
+=head1 SOURCE
+
+The source code repository for Weasel is at
+ https://github.com/perl-weasel/weasel
+
+=head1 SUPPORT
+
+Community support is available through
+L<perl-weasel@googlegroups.com|mailto:perl-weasel@googlegroups.com>.
+
+=head1 LICENSE AND COPYRIGHT
+
+ (C) 2016  Erik Huelsmann
+
+Licensed under the same terms as Perl.
+
+=cut
+
+1;
