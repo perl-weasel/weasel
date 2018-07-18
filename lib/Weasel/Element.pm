@@ -143,7 +143,7 @@ sub has_class {
     my ($self, $class) = @_;
 
     return grep { $_ eq $class }
-        split /\s+/, ($self->get_attribute('class') // '');
+        split /\s+/x, ($self->get_attribute('class') // '');
 }
 
 =item is_displayed

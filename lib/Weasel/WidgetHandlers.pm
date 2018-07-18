@@ -132,7 +132,7 @@ sub best_match_handler_class {
             if (exists $conditions->{classes}) {
                 %{$elem_classes} =
                    map { $_ => 1 }
-                   split /\s+/, ($driver->get_attribute($_id, 'class')
+                   split /\s+/x, ($driver->get_attribute($_id, 'class')
                                  // '')
                        unless defined $elem_classes;
 

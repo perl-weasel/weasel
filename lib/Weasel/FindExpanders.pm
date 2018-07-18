@@ -84,7 +84,7 @@ sub expand_finder_pattern {
 
     ##no critic(ProhibitCaptureWithoutTest)
     return $pattern
-        if ! ($pattern =~ m/^\*([^\|]+)/);
+        if ! ($pattern =~ m/^\*([^\|]+)/x);
     my $name = $1;
     ##critic(ProhibitCaptureWithoutTest)
 
