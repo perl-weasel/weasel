@@ -56,7 +56,7 @@ sub button_expander {
     my @btn_clauses;
     if (defined $args{text}) {
         push @input_clauses, "(\@alt='$args{text}' or \@value='$args{text}')";
-        push @btn_clauses, "text()='$args{text}'";
+        push @btn_clauses, "normalize-space(text())=normalize-space('$args{text}')";
     }
 
     for my $clause (qw/ id name /) {
@@ -109,7 +109,7 @@ sub contains_expander {
     my %args = @_;
 
     my $text = $args{text};
-    return ".//*[contains(.,'$text')][not(.//*[contains(.,'$text')])]";
+    return ".//*[contains(.,normalize-space('$text'))][not(.//*[contains(.,normalize-space('$text'))])]";
 }
 
 =item labeled_expander
@@ -127,7 +127,7 @@ sub labeled_expander {
 
     my $tag = $args{tag_name} // q{*};
     my $text = $args{text};
-    return ".//${tag}[\@id=//label[text()='$text']/\@for]";
+    return ".//${tag}[\@id=//label[normalize-space(text())=normalize-space('$text')]/\@for]";
 }
 
 =item link_expander
@@ -144,7 +144,7 @@ sub link_expander {
 
     my $text = $args{text} // '';
     # A tags with not-"no href" (thus, with an href [any href])
-    return ".//a[not(not(\@href)) and text()='$text' or \@title='$text']";
+    return ".//a[not(not(\@href)) and normalize-space(text())=normalize-space('$text') or \@title='$text']";
 }
 
 =item option_expander
@@ -162,7 +162,7 @@ sub option_expander {
 
     my $text = $args{text} // '';
     my $value = $args{value} // '';
-    return ".//option[text()='$text' or \@value='$value']";
+    return ".//option[normalize-space(text())=normalize-space('$text') or \@value='$value']";
 }
 
 =item password_expander
