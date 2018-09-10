@@ -1,3 +1,6 @@
+** 0.14 / 2018-09-11
+   - Correctly update version numbers in all files
+
 ** 0.13 / 2018-09-10
    - Normalize space in tag content (text()) being compared
      Removes the problem of leading and trailing space
