@@ -15,7 +15,7 @@ Weasel::Widgets::HTML::Input - Parent of the INPUT, OPTION, TEXTAREA and BUTTON 
 
 =head1 DEPENDENCIES
 
-This module wraps L<Selenium::Remote::Driver>, version 2.
+
 
 =cut
 
