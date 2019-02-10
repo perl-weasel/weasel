@@ -505,7 +505,7 @@ sub _wrap_widget {
     my $best_class = best_match_handler_class(
         $self->driver, $_id, $self->widget_groups) // 'Weasel::Element';
     $widget_args //= [];
-    return $best_class->new(_id => $_id, session => $self, @$widget_args);
+    return $best_class->new(_id => $_id, session => $self, @{$widget_args});
 }
 
 =back
