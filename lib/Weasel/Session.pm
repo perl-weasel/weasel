@@ -244,13 +244,14 @@ sub find_all {
     my ($self, $element, $pattern, %args) = @_;
 
     my $expanded_pattern;
-    if (exists $args{scheme} and $args{scheme} eq 'css') {
-        $expanded_pattern =
-            q{.} . HTML::Selector::XPath->new($pattern)->to_xpath;
-    }
-    else {
-        $expanded_pattern = expand_finder_pattern($pattern, \%args);
-    }
+    # if (exists $args{scheme} and $args{scheme} eq 'css') {
+    #     delete $args{scheme};
+    #     $expanded_pattern =
+    #         q{.} . HTML::Selector::XPath->new($pattern)->to_xpath;
+    # }
+    # else {
+    $expanded_pattern = expand_finder_pattern($pattern, \%args);
+    # }
     my @rv = $self->_logged(
         sub {
             return
