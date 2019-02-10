@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.05
+0.06
 
 =head1 SYNOPSIS
 
@@ -45,11 +45,12 @@ use warnings;
 use Moose;
 use namespace::autoclean;
 
+use HTML::Selector::XPath;
 use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 
 =head1 ATTRIBUTES
@@ -242,7 +243,14 @@ See L<Weasel::Element>'s C<find_all> function for more documentation.
 sub find_all {
     my ($self, $element, $pattern, %args) = @_;
 
-    my $expanded_pattern = expand_finder_pattern($pattern, \%args);
+    my $expanded_pattern;
+    if (exists $args{scheme} and $args{scheme} eq 'css') {
+        $expanded_pattern =
+            '.' . HTML::Selector::XPath->new($pattern)->to_xpath;
+    }
+    else {
+        $expanded_pattern = expand_finder_pattern($pattern, \%args);
+    }
     my @rv = $self->_logged(
         sub {
             return
