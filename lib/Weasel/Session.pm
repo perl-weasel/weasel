@@ -490,12 +490,12 @@ sub _logged {
     $hook->("pre_$e", $pre);
     if (wantarray) {
         my @rv = $f->();
-        $hook->("post_$e", sub { return $l->(\@rv); });
+        $hook->("post_$e", sub { return $post->(\@rv); });
         return @rv;
     }
     else {
         my $rv = $f->();
-        $hook->("post_$e", sub { return $l->($rv); });
+        $hook->("post_$e", sub { return $post->($rv); });
         return $rv;
     }
 };

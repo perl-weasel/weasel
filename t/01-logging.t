@@ -87,7 +87,9 @@ is_deeply(\@logs,
            ['post_tag_name', 'found tag with name span'],
            ['post_find_all', 'found 2 elements for span 
  - Weasel::Element (span)
- - Weasel::Element (span)']
+ - Weasel::Element (span)'],
+           ['pre_screenshot', 'screenshot'],
+           ['post_screenshot', 'screenshot'],
           ], 'Compare log output');
 
 done_testing;
