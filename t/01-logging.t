@@ -29,6 +29,11 @@ sub find_all {
     return (wantarray) ? @rv : \@rv;
 }
 
+sub screenshot {
+
+    return;
+}
+
 package main;
 
 use Weasel;
@@ -58,6 +63,10 @@ my $session = $weasel->session;
 #  list context -- yet the logger will receive an array ref (always)
 my @found = $session->page->find_all('span');
 my $found = $session->page->find_all('span');
+
+# `find_all' uses a different calling pattern than `screenshot'
+# and `is_displayed'
+$session->screenshot;
 
 is(scalar(@found), 2, 'Number of tags found equals two');
 is(ref $found, 'ARRAY', 'Scalar context returns ARRAYREF');
