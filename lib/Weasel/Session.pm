@@ -481,7 +481,7 @@ C<$log_hook> for lazy evaluation.
 sub _unlogged {
     my ($self, $func) = @_;
 
-    local $self->{log_hook} = undef;
+    local $self->{log_hook} = undef; ## no critic (Variables::ProhibitLocalVars)
     $func->();
 
     return;
