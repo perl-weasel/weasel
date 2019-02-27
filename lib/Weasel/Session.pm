@@ -478,7 +478,6 @@ sub _wrap_callback {
     }
     else {
         my $count = 0;
-        my $rv;
         return sub {
             if ($count) {
                 my $log_hook = $self->log_hook;
@@ -560,7 +559,7 @@ C<$log_hook> for lazy evaluation.
 sub _unlogged {
     my ($self, $func) = @_;
 
-    local $self->{log_hook} = undef; ## no critic (Variables::ProhibitLocalVars)
+    local $self->{log_hook} = undef;
     $func->();
 
     return;
