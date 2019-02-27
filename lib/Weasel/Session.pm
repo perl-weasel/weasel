@@ -423,12 +423,44 @@ session-global settings.
 
 =cut
 
+sub _wrap_callback {
+    my ($self, $cb) = @_;
+
+    if (! $self->log_hook) {
+        return $cb;
+    }
+    else {
+        my $count = 0;
+        my $rv;
+        return sub {
+            if ($count) {
+                my $log_hook = $self->log_hook;
+                local $self->{log_hook} = undef; # suppress logging
+                my $rv = $cb->();
+                if ($rv) {
+                    # $self->log_hook is still bound to 'undef'
+                    $log_hook->('post_wait_for',
+                                "success after $count retries");
+                }
+                $count++;
+                return $rv;
+            }
+            else {
+                $count++;
+                $self->log_hook->('pre_wait_for',
+                                  'checking wait_for conditions');
+                return $cb->();
+            }
+        };
+    }
+}
+
 sub wait_for {
     my ($self, $callback, %args) = @_;
 
     return $self->_logged(
         sub {
-            $self->driver->wait_for($callback,
+            $self->driver->wait_for($self->_wrap_callback($callback),
                                     retry_timeout => $self->retry_timeout,
                                     poll_delay => $self->poll_delay,
                                     %args);
