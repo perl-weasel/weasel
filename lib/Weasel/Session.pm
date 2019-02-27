@@ -329,6 +329,53 @@ sub get_text {
         'get_text', 'element text');
 }
 
+=item set_attribute($element_id, $attribute_name, $value)
+
+Changes the value of the attribute named by C<$attribute_name> to C<$value>
+for the element identified by C<$element_id>.
+
+=cut
+
+sub set_attribute {
+    my ($self, $element, $attribute, $value) = @_;
+
+    return $self->_logged(
+        sub {
+            return $self->driver->set_attribute($element->_id,
+                                                $attribute, $value);
+        },
+        'set_attribute', qq{Setting attribute $attribute to '$value'});
+}
+
+=item get_selected($element_id)
+
+=cut
+
+sub get_selected {
+    my ($self, $element) = @_;
+
+    return $self->_logged(
+        sub {
+            return $self->driver->get_selected($element->_id);
+        },
+        'get_selected', 'Is element selected?');
+}
+
+=item set_selected($element_id, $value)
+
+=cut
+
+sub set_selected {
+    my ($self, $element, $value) = @_;
+
+    return $self->_logged(
+        sub {
+            return $self->driver->get_selected($element->_id, $value);
+        },
+        'set_selected', qq{Setting 'selected' property: $value});
+}
+
+
 =item is_displayed($element)
 
 Returns a boolean value indicating if the element identified by
