@@ -5,7 +5,7 @@ Weasel::Session - Connection to an encapsulated test driver
 
 =head1 VERSION
 
-0.08
+0.09
 
 =head1 SYNOPSIS
 
