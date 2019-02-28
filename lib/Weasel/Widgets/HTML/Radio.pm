@@ -68,7 +68,7 @@ sub value {
                                    value => $new_value)->click;
     }
 
-    my $selected = first grep { $_->selected } $self->_find_related_radios;
+    my $selected = first { $_->selected } $self->_find_related_radios;
     return $selected ? $selected->get_attribute('value') : '';
 }
 
