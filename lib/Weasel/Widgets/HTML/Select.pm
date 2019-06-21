@@ -56,6 +56,9 @@ sub _option_popup {
     return $self;
 }
 
+=item find_option
+
+=cut
 
 sub find_option {
     my ($self, $text) = @_;
@@ -63,6 +66,10 @@ sub find_option {
 
     return $popup->find('*option', text => $text);
 }
+
+=item find_options
+
+=cut
 
 sub find_options {
     my ($self) = @_;
