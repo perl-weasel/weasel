@@ -4,6 +4,8 @@
 
 Weasel - Perl's php/Mink-inspired abstracted web-driver framework
 
+[![Build Status](https://travis-ci.org/perl-weasel/weasel.svg?branch=master)](https://travis-ci.org/perl-weasel/weasel)
+
 # VERSION
 
 0.25
