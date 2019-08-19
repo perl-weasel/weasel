@@ -52,6 +52,7 @@ use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
 our $VERSION = '0.12';
 
+our $MINIMUM_DRIVER_VERSION = '0.03';
 
 =head1 ATTRIBUTES
 
@@ -593,7 +594,7 @@ before 'BUILDARGS', sub {
     confess "Driver used to construct session object uses old API version;\n" .
             'some functionality may not work correctly'
         if ($args->{driver}
-            && $args->{driver}->implements < $Weasel::DriverRole::VERSION);
+            && $args->{driver}->implements < $MINIMUM_DRIVER_VERSION);
 };
 
 sub _appending_wrap {
