@@ -8,7 +8,7 @@ Weasel - Perl's php/Mink-inspired abstracted web-driver framework
 
 # VERSION
 
-0.25
+0.27
 
 # SYNOPSIS
 
@@ -158,7 +158,7 @@ channel
 # COPYRIGHT
 
 ```
-Copyright (c)  2016-2019  Erik Huelsmann
+Copyright (c)  2016-2020  Erik Huelsmann
 ```
 
 # LICENSE
