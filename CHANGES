@@ -1,4 +1,8 @@
 
+** 0.31 / 2023-07-24
+   - Fix typo in 'titled' expander affecting 'field' as well
+   - Update/expand POD
+
 ** 0.30 / 2023-07-24
    - Add 'titled' and 'field' expanders
    - Fix POD failures in Weasel::FindExpanders::HTML

@@ -5,19 +5,13 @@ Weasel::FindExpanders::HTML - Weasel FindExpanders HTML
 
 =head1 VERSION
 
-0.02
+0.31
 
 =head1 SYNOPSIS
 
   use Weasel::FindExpanders::HTML;
 
-  my $button = $session->find($session->page, "@button|{text=>\"whatever\"}");
-
-=cut
-
-=head1 DEPENDENCIES
-
-
+  my $button = $session->find($session->page, '*button|{text=>"whatever"}');
 
 =cut
 
@@ -29,6 +23,10 @@ use warnings;
 use Weasel::FindExpanders qw/ register_find_expander /;
 
 =head1 DESCRIPTION
+
+This module provides a series of short-cuts for XPath expressions for use
+with Weasel's C<find()> function for testing of HTML pages, geared toward
+standard HTML5 tags.
 
 =cut
 
@@ -178,7 +176,7 @@ sub titled_expander {
 
     my $tag = $args{tag_name} // q{*};
     my $text = $args{text};
-    return ".//${tag}[\@title=normalize-space('$text')";
+    return ".//${tag}[\@title=normalize-space('$text')]";
 }
 
 =item field_expander
@@ -392,16 +390,16 @@ register_find_expander($_->{name}, 'HTML', $_->{expander})
 
 =head1 AUTHOR
 
-Erik Huelsmann
+  Erik Huelsmann
 
 =head1 CONTRIBUTORS
 
-Erik Huelsmann
-Yves Lavoie
+  Erik Huelsmann
+  Yves Lavoie
 
 =head1 MAINTAINERS
 
-Erik Huelsmann
+  Erik Huelsmann
 
 =head1 BUGS AND LIMITATIONS
 
@@ -411,7 +409,7 @@ Bugs can be filed in the GitHub issue tracker for the Weasel project:
 =head1 SOURCE
 
 The source code repository for Weasel is at
- https://github.com/perl-weasel/weasel
+ L<https://github.com/perl-weasel/weasel>
 
 =head1 SUPPORT
 
