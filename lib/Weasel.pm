@@ -3,10 +3,6 @@
 
 Weasel - Perl's php/Mink-inspired abstracted web-driver framework
 
-=head1 VERSION
-
-0.31
-
 =head1 SYNOPSIS
 
   use Weasel;
@@ -43,7 +39,7 @@ can be independently developed and uploaded to CPAN, or contributed.
 (We welcome and encourage both!)
 
 
-=head2 DIFFERENCES WITH OTHER FRAMEWORKS
+=head2 Differences with other frameworks
 
 =over
 
@@ -99,6 +95,13 @@ is transparently handled by overriding the widget's C<find> and C<find_all>
 methods.
 
 =back
+
+=head2 PageObject architecture pattern support
+
+The functionality to encapsulate behaviours in widgets, enables intuitive
+integration of the L<Page Object architectural pattern|https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/>
+for design of test code. This pattern allows reduction of test code due
+and separation of concerns between the functional test and the page interaction.
 
 =cut
 

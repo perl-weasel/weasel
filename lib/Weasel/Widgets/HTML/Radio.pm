@@ -3,10 +3,6 @@
 
 Weasel::Widgets::HTML::Radio - Wrapper for INPUTs of type 'radio'
 
-=head1 VERSION
-
-0.01
-
 =head1 SYNOPSIS
 
   my $selectable = $session->page->find('*radio');

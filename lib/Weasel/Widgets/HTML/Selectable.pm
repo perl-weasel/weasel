@@ -3,10 +3,6 @@
 
 Weasel::Widgets::HTML::Selectable - Wrapper for selectable elements
 
-=head1 VERSION
-
-0.01
-
 =head1 SYNOPSIS
 
   my $selectable = $session->page->find('./option');

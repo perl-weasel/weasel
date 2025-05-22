@@ -3,10 +3,6 @@
 
 Weasel::Widgets::HTML - Helper module for bulk-registration of HTML widgets
 
-=head1 VERSION
-
-0.01
-
 =head1 SYNOPSIS
 
   use Weasel::Widgets::HTML;

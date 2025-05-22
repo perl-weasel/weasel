@@ -3,10 +3,6 @@
 
 Weasel::Widgets::HTML::Select - Wrapper of SELECT tag
 
-=head1 VERSION
-
-0.02
-
 =head1 SYNOPSIS
 
 =head1 DESCRIPTION

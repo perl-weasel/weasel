@@ -1,17 +1,16 @@
 
 =head1 NAME
 
-Weasel::Element::Document - Weasel Element Document 
-
-=head1 VERSION
-
-0.01
+Weasel::Element::Document - Weasel Document (root) element
 
 =head1 SYNOPSIS
 
 
 
 =head1 DESCRIPTION
+
+The root element of the document tag tree: corresponds with the C<html>
+tag of the HTML document.
 
 =cut
 
@@ -35,6 +34,8 @@ use namespace::autoclean;
 =over
 
 =item _id
+
+Internal. Contains the reference to the in-browser element.
 
 =cut
 

@@ -3,10 +3,6 @@
 
 Weasel::Widgets::HTML::Input - Parent of the INPUT, OPTION, TEXTAREA and BUTTON wrappers
 
-=head1 VERSION
-
-0.28
-
 =head1 SYNOPSIS
 
 =head1 DESCRIPTION

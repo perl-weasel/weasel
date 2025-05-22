@@ -3,10 +3,6 @@
 
 Weasel::Element - The base HTML/Widget element class
 
-=head1 VERSION
-
-0.02
-
 =head1 SYNOPSIS
 
    my $element = $session->page->find("./input[\@name='phone']");

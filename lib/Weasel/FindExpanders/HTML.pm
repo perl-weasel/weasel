@@ -3,10 +3,6 @@
 
 Weasel::FindExpanders::HTML - Weasel FindExpanders HTML
 
-=head1 VERSION
-
-0.31
-
 =head1 SYNOPSIS
 
   use Weasel::FindExpanders::HTML;
