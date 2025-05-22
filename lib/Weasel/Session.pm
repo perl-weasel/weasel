@@ -291,13 +291,16 @@ sub find_all {
         sub {
             my ($rv) = @_;
             ##no critic(ProhibitUselessTopic)
-            return 'found ' . scalar(@{$rv}) . " elements for $pattern "
+            return 'found ' . scalar(@{$rv}) . " elements for $expanded_pattern "
                 . (join ', ', %args) . "\n"
                 . (join "\n",
                         map { ' - ' . ref($_)
-                                  . ' (' . $_->tag_name . ')' } @{$rv});
+                                  . ' (' . $_->tag_name
+                                       . ($_->get_attribute('id')
+                                          ? '#' . $_->get_attribute('id') : '') .')'
+                   } @{$rv});
         },
-        "pattern: $pattern");
+        "pattern: $pattern($expanded_pattern)");
     return wantarray ? @rv : \@rv;
 }
 
