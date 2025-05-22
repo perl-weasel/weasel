@@ -26,7 +26,7 @@ The session represents a connection to a browser window, allowing interaction
 with that window. It abstracts from the protocol being used for such access;
 meaning that the true interactions may be achieved through Selenium, W3C
 Web Driver, Cypress, Playwright or any other protocol or access method as
-long as the driver adheres to the L< Weasel::DriverRole > protocol of the
+long as the driver adheres to the L<Weasel::DriverRole> protocol of the
 required minimum version.
 
 =cut
