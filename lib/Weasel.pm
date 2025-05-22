@@ -119,8 +119,6 @@ use warnings;
 use Moose;
 use namespace::autoclean;
 
-our $VERSION = '0.31';
-
 # From https://w3c.github.io/webdriver/webdriver-spec.html#keyboard-actions
 my %key_codes = (
     NULL            => "\N{U+E000}",

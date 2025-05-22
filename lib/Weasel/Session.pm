@@ -51,8 +51,6 @@ use Module::Runtime qw/ use_module /;;
 use Weasel::FindExpanders qw/ expand_finder_pattern /;
 use Weasel::WidgetHandlers qw| best_match_handler_class |;
 
-our $VERSION = '0.30';
-
 our $MINIMUM_DRIVER_VERSION = '0.03';
 
 =head1 ATTRIBUTES
