@@ -106,7 +106,7 @@ Available C<scheme> values:
 sub find {
     my ($self, @args) = @_;
 
-    return $self->session->find($self, @args);
+    return $self->session->find($self, scheme => 'xpath', @args);
 }
 
 =item find_all($locator [, scheme => $scheme] [, widget_args => \@args ] [, %locator_args])
@@ -155,7 +155,7 @@ sub find_all {
     my ($self, @args) = @_;
 
     # expand $locator based on framework plugins (e.g. Dojo)
-    return $self->session->find_all($self, @args);
+    return $self->session->find_all($self, scheme => 'xpath', @args);
 }
 
 =item get_attribute($attribute)
