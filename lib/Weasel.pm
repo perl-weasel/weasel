@@ -7,13 +7,13 @@ Weasel - Perl's php/Mink-inspired abstracted web-driver framework
 
   use Weasel;
   use Weasel::Session;
-  use Weasel::Driver::Selenium2;
+  use Weasel::Driver::Selenium4;
 
   my $weasel = Weasel->new(
        default_session => 'default',
        sessions => {
           default => Weasel::Session->new(
-            driver => Weasel::Driver::Selenium2->new(%opts),
+            driver => Weasel::Driver::Selenium4->new(%opts),
           ),
        });
 
@@ -33,7 +33,8 @@ L<Pherkin::Extension::Weasel> provides integration with
 L<Test::BDD::Cucumber> (aka pherkin), for BDD testing.
 
 For the actual page interaction, this module needs a driver to
-be installed.  Currently, that means L<Weasel::Driver::Selenium2>.
+be installed. Available drivers: L<Weasel::Driver::Selenium4>,
+L<Weasel::Driver::Mock> and L<Weasel::Driver::Selenium2>.
 Other driver implementations, such as L<Sahi|http://sahipro.com/>
 can be independently developed and uploaded to CPAN, or contributed.
 (We welcome and encourage both!)
