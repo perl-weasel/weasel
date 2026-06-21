@@ -581,8 +581,8 @@ sub wait_for {
     return $self->_logged(
         sub {
             $self->driver->wait_for($self->_wrap_callback($callback),
-                                    retry_timeout => $self->retry_timeout,
-                                    poll_delay => $self->poll_delay,
+                                    retry_timeout => $args{retry_timeout} // $self->retry_timeout,
+                                    poll_delay => $args{poll_delay} // $self->poll_delay,
                                     %args);
         },
         'wait_for', 'waiting for condition');
