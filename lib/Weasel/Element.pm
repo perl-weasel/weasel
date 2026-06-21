@@ -75,6 +75,32 @@ L<Weasel::FindExpanders::HTML> for documentation of the standard expanders.
 Any arguments passed in the C<$widget_args> array reference, are passed to
 the widget's constructor.
 
+Available C<scheme> values:
+
+=over 8
+
+=item C<class>
+
+=item C<class_name>
+
+=item C<css>
+
+=item C<id>
+
+=item C<link>
+
+=item C<link_text>
+
+=item C<name>
+
+=item C<partial_link_text>
+
+=item C<tag_name>
+
+=item C<xpath> (default)
+
+=back
+
 =cut
 
 sub find {
@@ -96,6 +122,32 @@ L<Weasel::FindExpanders::HTML> for documentation of the standard expanders.
 
 Any arguments passed in the C<$widget_args> array reference, are passed to
 the widget's constructor.
+
+Available C<scheme> values:
+
+=over 8
+
+=item C<class>
+
+=item C<class_name>
+
+=item C<css>
+
+=item C<id>
+
+=item C<link>
+
+=item C<link_text>
+
+=item C<name>
+
+=item C<partial_link_text>
+
+=item C<tag_name>
+
+=item C<xpath> (default)
+
+=back
 
 =cut
 
